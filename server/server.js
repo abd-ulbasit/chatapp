@@ -5,12 +5,14 @@ const Chat = require("./models/Chat");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const app = express();
+const User = require("./models/User");
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
         origin: "http://localhost:5173",
     },
 });
+app.use(cors());
 app.use(express.json());
 io.on("connection", (socket) => {
     console.log("New client connected " + socket.id);
@@ -26,7 +28,7 @@ mongoose
     .then(() => console.log("MongoDB Connected..."))
     .catch((err) => console.log(err));
 app.get("/", (req, res) => {
-    res.send("Hello ");
+    res.send("Hello world ");
 });
 app.post("/newchat", async (req, res) => {
     const newChat = new Chat(req.body);
@@ -120,7 +122,7 @@ UPDATE CHAT REQUEST BODY SHOULD BE IN THIS FORMAT
   "username": "bilal",
   "chatmate": "usman",
   "sendername": "Basit",
-  "message": "HEllo GAAAAAAAAAY000000000000",
+  "message": "HEllo G000000000",
   "timestamp": "2022-08-21T05:10:49.059Z",
   "delivered": true,
   "deliverTime": "2022-08-21T05:10:49.059Z",
@@ -129,3 +131,42 @@ UPDATE CHAT REQUEST BODY SHOULD BE IN THIS FORMAT
 }
 
 */
+
+app.post("/newuser", async (req, res) => {
+    const userInDB = await User.find({ username: req.body.username });
+    console.log(userInDB);
+    if (userInDB.length > 0) {
+        res.status(200).send(
+            JSON.stringify({ message: "User Already Exists" })
+        );
+        return;
+    }
+    const newUser = new User(req.body);
+    console.log(newUser);
+    try {
+        await newUser.save();
+        res.status(201).send(newUser);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+app.post("/users", async (req, res) => {
+    console.log(req.body.username);
+    try {
+        const user = await User.findOne({
+            $and: [
+                { username: req.body.username },
+                { password: req.body.password },
+            ],
+        });
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.status(200).send({
+                message: "User Not Found",
+            });
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
