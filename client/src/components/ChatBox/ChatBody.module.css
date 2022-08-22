@@ -1,0 +1,8 @@
+.chatbody{
+    overflow: scroll;
+    
+}
+::-webkit-scrollbar{
+    width: 17px;
+    color: red;
+}

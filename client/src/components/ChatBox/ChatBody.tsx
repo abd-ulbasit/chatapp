@@ -1,11 +1,19 @@
 import React, { FC } from 'react'
-import { ChatType } from '../../Models/Models'
-
-const ChatBody: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
-    console.log(chat)
+import { ChatMessageType, ChatType } from '../../Models/Models'
+import ChatBubble from './ChatBubble'
+import classes from "./ChatBody.module.css"
+const ChatBody: FC<{ chat: ChatMessageType[] | undefined }> = ({ chat }) => {
 
     return (
-        <>bod</>
+        <div className={classes.chatbody} >
+            {chat?.map((message, index) => {
+                return (
+                    <ChatBubble key={index} chat={message} ></ChatBubble>
+
+                )
+            })
+            }
+        </div>
     )
 }
 

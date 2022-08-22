@@ -6,13 +6,16 @@ import ChatBottom from './ChatBox/ChatBottom'
 import ChatHeader from './ChatBox/ChatHeader'
 import classes from "./Chat.module.css"
 import Layout from './Layout'
-import { ChatType } from '../Models/Models'
+import { ChatMessageType, ChatType } from '../Models/Models'
 import { useParams } from 'react-router'
 const username = "Basit"
 const Chat: FC<{ chats: ChatType[] }> = ({ chats }) => {
     const { id } = useParams();
-    const chat = chats.find(c => c._id === id)
-    console.log(chat);
+    const chat: ChatType | undefined = chats.find(c => c._id === id);
+    const processedChat: ChatMessageType[] | undefined = chat?.chat;
+    // console.log(processedChat);
+    //TODO forward prodcessed this chat in the chat body
+    // console.log(chat);
     return (
         //returning the chat box from here
         <div className={classes.chatbox}>
@@ -21,7 +24,7 @@ const Chat: FC<{ chats: ChatType[] }> = ({ chats }) => {
             </div>
             <div className={classes.body}>
             </div>
-            <ChatBody chat={chat}></ChatBody>
+            <ChatBody chat={processedChat}></ChatBody>
             <div className={classes.bottom}>
                 <ChatBottom></ChatBottom>
             </div>

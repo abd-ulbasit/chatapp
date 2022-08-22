@@ -1,0 +1,25 @@
+.received{
+    border-radius: 15px;
+    max-width :70%;
+    padding-right: auto;
+    background: white;
+    width: fit-content;
+    padding :10px 15px;
+    clear:both;
+    float: left;
+    margin: 10px;
+
+}
+.sent{
+    border-radius: 15px;
+    max-width :70%;
+    float: right;
+    clear: both;
+    display: block;
+    background: blue;
+    padding :10px 15px;
+    width: fit-content;
+    margin: 10px;
+
+    
+}

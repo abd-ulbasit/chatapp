@@ -1,8 +1,14 @@
-import React from 'react'
-
-const ChatBubble = () => {
+import React, { FC } from 'react'
+import { ChatMessageType } from '../../Models/Models'
+import classes from "./ChatBubble.module.css"
+const username = "Basit"
+const ChatBubble: FC<{ chat: ChatMessageType | undefined }> = ({ chat }) => {
     return (
-        <div>ChatBubble</div>
+        <div>
+            <div className={chat?.sendername === username ? classes.sent : classes.received} >
+                {chat?.message}
+            </div>
+        </div>
     )
 }
 
