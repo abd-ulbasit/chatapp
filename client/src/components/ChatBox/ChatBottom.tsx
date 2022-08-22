@@ -1,14 +1,32 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
+import { ChatType } from '../../Models/Models'
 import Button from '../UI/Button'
 import classes from "./ChatBottom.module.css"
-const ChatBottom = () => {
+const username = "Basit"
+const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
     const [message, setMessage] = useState('')
     const handlesendMessage = (e: React.FormEvent<HTMLFormElement> | undefined) => {
-        e?.preventDefault()
+        e?.preventDefault();
+        const newMessage = {
+            username: username,
+            chatmate: chat?.person1 === username ? chat?.person2 : chat?.person1,
+            message: message,
+            sendername: username,
+            timestamp: new Date(),
+            delivered: false,
+            read: false,
+            deliveryTime: new Date(),
+            readTime: new Date()
+        }
+        console.log(chat?.person1 === username ? chat?.person2 : chat?.person1,)
+        console.log(chat?.person2, chat?.person1)
+            ;
         // console.log(message);
         axios.patch("http://localhost:3000/updatechat", {
-
+            newMessage
+        }).then(res => {
+            console.log(res);
         })
 
     }
@@ -23,13 +41,13 @@ const ChatBottom = () => {
 export default ChatBottom;
 
 // {
-//     "username": "Basit",
-//     "chatmate": "usman",
-//     "sendername": "Basit",
-//     "message": "HEllo G000000000",
-//     "timestamp": "2022-08-21T05:10:49.059Z",
-//     "delivered": true,
-//     "deliverTime": "2022-08-21T05:10:49.059Z",
-//     "read": true,
-//     "readTime": "2022-08-21T05:10:49.059Z"
+    // "username": "Basit",
+    // "chatmate": "usman",
+    // "sendername": "Basit",
+    // "message": "HEllo G000000000",
+    // "timestamp": "2022-08-21T05:10:49.059Z",
+    // "delivered": true,
+    // "deliverTime": "2022-08-21T05:10:49.059Z",
+    // "read": true,
+    // "readTime": "2022-08-21T05:10:49.059Z"
 //   }

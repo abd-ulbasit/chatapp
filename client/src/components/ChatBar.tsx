@@ -6,8 +6,8 @@ const username = "Basit"
 import classes from "./ChatBar.module.css"
 import { ChatType } from '../Models/Models';
 
-const sendersMessageStyle = { color: 'pink' }
-const recipientsMessageStyle = { color: '#00ff00', padding: "0 38px " }
+const sendersMessageStyle = { color: '#6b4b91' }
+const recipientsMessageStyle = { color: '#420101', padding: "0 38px " }
 
 const ChatBar: FC<{ chats: ChatType[] }> = ({ chats }) => {
 

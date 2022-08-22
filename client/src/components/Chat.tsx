@@ -16,6 +16,7 @@ const Chat: FC<{ chats: ChatType[] }> = ({ chats }) => {
     // console.log(processedChat);
     //TODO forward prodcessed this chat in the chat body
     // console.log(chat);
+    // console.log(chat)
     return (
         //returning the chat box from here
         <div className={classes.chatbox}>
@@ -26,7 +27,7 @@ const Chat: FC<{ chats: ChatType[] }> = ({ chats }) => {
             </div>
             <ChatBody chat={processedChat}></ChatBody>
             <div className={classes.bottom}>
-                <ChatBottom></ChatBottom>
+                <ChatBottom chat={chat}></ChatBottom>
             </div>
         </div>
 

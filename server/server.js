@@ -43,8 +43,8 @@ app.post("/newchat", async (req, res) => {
 });
 app.get("/chats", async (req, res) => {
     try {
-        console.log("Params :", req.params);
-        console.log("Query :", req.query);
+        // console.log("Params :", req.params);
+        // console.log("Query :", req.query);
         const chats = await Chat.find({
             $or: [
                 { person1: req.query.username },
@@ -52,7 +52,7 @@ app.get("/chats", async (req, res) => {
             ],
         });
         res.send(chats);
-        console.log(chats);
+        // console.log(chats);
     } catch (error) {
         res.status(500).send(error);
     }
@@ -66,26 +66,27 @@ app.delete("/deleteChat/", async (req, res) => {
             ],
         });
         res.status(204).send(chats);
-        console.log(chats);
+        // console.log(chats);
     } catch (error) {
         res.status(500).send(error);
     }
 });
 app.patch("/updatechat", async (req, res) => {
+    console.log(req.body);
     try {
         const chats = await Chat.updateOne(
             {
                 $or: [
                     {
                         $and: [
-                            { person1: req.body.username },
-                            { person2: req.body.chatmate },
+                            { person1: req.body.newMessage.username },
+                            { person2: req.body.newMessage.chatmate },
                         ],
                     },
                     {
                         $and: [
-                            { person2: req.body.username },
-                            { person1: req.body.chatmate },
+                            { person2: req.body.newMessage.username },
+                            { person1: req.body.newMessage.chatmate },
                         ],
                     },
                 ],
@@ -93,17 +94,17 @@ app.patch("/updatechat", async (req, res) => {
             {
                 $push: {
                     chat: {
-                        sendername: req.body.sendername,
-                        message: req.body.message,
-                        timestamp: req.body.timestamp,
+                        sendername: req.body.newMessage.sendername,
+                        message: req.body.newMessage.message,
+                        timestamp: req.body.newMessage.timestamp,
                         receiver: {
                             delivery: {
-                                delivered: req.body.delivered,
-                                deliverTime: req.body.deliverTime,
+                                delivered: req.body.newMessage.delivered,
+                                deliverTime: req.body.newMessage.deliverTime,
                             },
                             reading: {
-                                read: req.body.read,
-                                readTime: req.body.readTime,
+                                read: req.body.newMessage.read,
+                                readTime: req.body.newMessage.readTime,
                             },
                         },
                     },
