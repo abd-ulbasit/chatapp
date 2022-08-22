@@ -1,0 +1,27 @@
+.page{
+    display: flex;
+    flex-direction: row;
+    background-color: #f5f5f5;
+    gap :25px;
+}
+.chatbox{
+    background-color: #a38787;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 97vh;
+    justify-content: space-between;
+    
+    left: 0;
+    top: 0;
+    position: relative;
+    overflow: hidden;
+    bottom: 0;
+    right: 0;
+    margin: none;
+
+
+}
+.header{
+    color :red;
+}
