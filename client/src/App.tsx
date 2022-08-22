@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import { } from 'react'
 import { Routes, Route } from "react-router"
 import LogInPage from './components/LogInPage'
-import ChatBar from './components/ChatBar'
+import LandingPage from './components/LandingPage'
 // const socket = io('http://localhost:3000', {
 //   query: {
 //     id: '123basit'
@@ -12,7 +12,7 @@ import ChatBar from './components/ChatBar'
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<ChatBar></ChatBar>} />
+      <Route path="/" element={<LandingPage></LandingPage>} />
     </Routes>)
 }
 
