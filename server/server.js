@@ -43,11 +43,12 @@ app.post("/newchat", async (req, res) => {
 });
 app.get("/chats", async (req, res) => {
     try {
-        console.log(req.body.username);
+        console.log("Params :", req.params);
+        console.log("Query :", req.query);
         const chats = await Chat.find({
             $or: [
-                { person1: req.body.username },
-                { person2: req.body.username },
+                { person1: req.query.username },
+                { person2: req.query.username },
             ],
         });
         res.send(chats);
@@ -131,6 +132,31 @@ UPDATE CHAT REQUEST BODY SHOULD BE IN THIS FORMAT
 }
 
 */
+/**
+NEW CHAT REQUEST BODY SHOULD BE IN THIS FORMAT
+{
+  "person1": "Basit",
+  "person2": "Hanzala",
+  "chat": [
+    {
+      "sendername": "Basit",
+      "message": "hello Aji",
+      "timestamp": "2022-08-21T16:38:34.551Z",
+      "receiver": {
+        "delivery": {
+          "delivered": true,
+          "deliverTime": "2022-08-21T16:38:34.551Z"
+        },
+        "reading": {
+          "read": true,
+          "readTime": "2022-08-21T16:38:34.551Z"
+        }
+      }
+    }
+  ]
+} 
+
+ */
 
 app.post("/newuser", async (req, res) => {
     const userInDB = await User.find({ username: req.body.username });
