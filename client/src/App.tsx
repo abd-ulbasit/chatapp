@@ -9,6 +9,7 @@ import Layout from './components/Layout'
 import React from 'react'
 import axios from 'axios'
 import { ChatType } from "./Models/Models"
+import NewChat from './components/NewChat/NewChat'
 const username = "Basit"
 // const socket = io('http://localhost:3000', {
 //   query: {
@@ -32,6 +33,7 @@ function App() {
   return (
     <Layout chats={chats} >
       <Routes>
+        <Route path="/new" element={<NewChat></NewChat>} />
         <Route path="/chat/:id" element={<Chat chats={chats} ></Chat>} />
 
       </Routes>

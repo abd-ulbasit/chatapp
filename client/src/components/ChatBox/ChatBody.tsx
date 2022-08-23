@@ -9,7 +9,6 @@ const ChatBody: FC<{ chat: ChatMessageType[] | undefined }> = ({ chat }) => {
             {chat?.map((message, index) => {
                 return (
                     <ChatBubble key={index} chat={message} ></ChatBubble>
-
                 )
             })
             }

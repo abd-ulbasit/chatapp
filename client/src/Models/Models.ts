@@ -39,3 +39,7 @@ export interface ChatMessageType{
 
     }
 }
+export interface UserReceivedForNewChatType{
+    username:String;
+    _id:String;
+}

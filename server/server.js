@@ -74,7 +74,7 @@ app.delete("/deleteChat/", async (req, res) => {
 app.patch("/updatechat", async (req, res) => {
     console.log(req.body);
     try {
-        const chats = await Chat.updateOne(
+        const responsefromdb = await Chat.updateOne(
             {
                 $or: [
                     {
@@ -111,8 +111,15 @@ app.patch("/updatechat", async (req, res) => {
                 },
             }
         );
-        res.status(204).send(chats);
-        console.log(chats);
+        if (responsefromdb.modifiedCount === 1) {
+            res.status(204).send({ message: "updated" });
+        } else {
+            //TODO handle this case : user donot exist create a  new chat with this user and send the message
+            res.status(200).send({ message: "failed" });
+
+            // res.status(400).send({ error: "message not updated" });
+        }
+        console.log();
     } catch (error) {
         res.status(500).send(error);
     }
@@ -186,6 +193,35 @@ app.post("/users", async (req, res) => {
                 { password: req.body.password },
             ],
         });
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.status(200).send({
+                message: "User Not Found",
+            });
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+app.get("/users", async (req, res) => {
+    try {
+        const users = await User.find({}, { username: 1 })
+            .sort({ _id: -1 })
+            .limit(15);
+        res.status(200).send(users);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+app.get("/finduser", async (req, res) => {
+    try {
+        const user = await User.find(
+            {
+                username: { $regex: req.query.search, $options: "i" },
+            },
+            { username: 1 }
+        );
         if (user) {
             res.status(200).send(user);
         } else {

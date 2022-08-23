@@ -28,7 +28,7 @@
     max-width: 290px;
     gap: 2px;
     margin: none;
-    padding: none;  
+    padding: 0 10px;  
 }
 .lastmessage{
     font-size: 18px;
