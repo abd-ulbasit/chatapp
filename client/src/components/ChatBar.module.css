@@ -1,4 +1,5 @@
 .chatbarchat{
+    margin: 2px auto;
     display: flex;
     flex-direction: column;
     padding:6px 10px ;
@@ -21,14 +22,19 @@
 
 }
 .chatbar{
+    position: relative;    
+    width:30%;
+    min-width: 325px; 
+    outline: 2px solid rgb(56, 10, 18);
     display: flex;
     flex-direction: column;
     align-items: flex-start;    
     justify-content: start;
-    max-width: 290px;
     gap: 2px;
     margin: none;
-    padding: 0 10px;  
+    /* padding: 0 10px;   */
+    height: 100%;
+    overflow-y: scroll;
 }
 .lastmessage{
     font-size: 18px;
@@ -45,7 +51,7 @@
     text-decoration: none;
     color: black;
 }
-lastmessage::after{
+/* lastmessage::after{
     z-index: +2;
     background-color: blue;
     content: "hello";
@@ -59,4 +65,63 @@ lastmessage::after{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+} */
+/* .newchatlink{
+    text-decoration: none;
+    color: black;
+    border:1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    background-color: #f5f5f5;
+    width : 100%;
+} */
+.chatbarHeader{
+    position: fixed;
+    clear: both;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: purple;
+    height: auto;
+    width: inherit;
+    /* width: inherit; */
+    /* padding:0 20px ; */
+    z-index: 1;
+    /* width:30%; */
+    min-width: parent; 
+}
+.username{
+    font-size: 18px;
+    text-overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin: 0 10px;
+    padding: 20px 10px;
+}
+.newchatLink{
+    background-color: #f5f5f5;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    padding: 10px 18px;
+    margin: 10px 30px;
+    text-decoration: none;
+    color: black;
+}
+.chats{
+    
+    padding-top:70px ;
+    width: 100%;
+    background-color: yellow;
+    padding: auto;
+}
+::-webkit-scrollbar{
+    width: 0px;
+    color: black;
+}
+::-webkit-scrollbar-thumb{
+    color: black;
 }

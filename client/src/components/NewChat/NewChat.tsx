@@ -27,10 +27,11 @@ const NewChat = () => {
     return (
         <div className={classes.main} >
             <FindUser></FindUser>
+            {/* //maping the recently joined users to the list */}
             <div className={classes.newusers} >
                 {newUsers.map(user => {
                     return (
-                        <NavLink to={"chat/:id"} >{user}</NavLink>
+                        <NavLink to={`/chat/${user}`} >{user}</NavLink>
                     )
                 })}
             </div>

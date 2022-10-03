@@ -31,13 +31,16 @@ function App() {
     })
   }, [])
   return (
-    <Layout chats={chats} >
-      <Routes>
-        <Route path="/new" element={<NewChat></NewChat>} />
-        <Route path="/chat/:id" element={<Chat chats={chats} ></Chat>} />
+    <div className="app" >
+      <Layout chats={chats} >
+        <Routes>
+          <Route path="/new" element={<NewChat></NewChat>} />
+          <Route path="/chat/:id" element={<Chat chats={chats} ></Chat>} />
+          <Route path="/new" element={<NewChat></NewChat>} />
 
-      </Routes>
-    </Layout>
+        </Routes>
+      </Layout>
+    </div>
   )
 }
 

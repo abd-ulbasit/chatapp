@@ -31,9 +31,12 @@ app.get("/", (req, res) => {
     res.send("Hello world ");
 });
 app.post("/newchat", async (req, res) => {
-    const newChat = new Chat(req.body);
+    // const { newMessage } = req.body;
+    const newMessage = req.body.newChat;
+    console.log(newMessage);
+    const newChat = new Chat(newMessage);
     console.log(newChat);
-    console.log(req.body);
+    // console.log(req.body.);
     try {
         await newChat.save();
         res.status(201).send(newChat);
@@ -114,7 +117,7 @@ app.patch("/updatechat", async (req, res) => {
         if (responsefromdb.modifiedCount === 1) {
             res.status(204).send({ message: "updated" });
         } else {
-            //TODO handle this case : user donot exist create a  new chat with this user and send the message
+            //TODO handle this case : user donot exist create a  new chat with this user and send the message to this user
             res.status(200).send({ message: "failed" });
 
             // res.status(400).send({ error: "message not updated" });
@@ -128,15 +131,29 @@ app.patch("/updatechat", async (req, res) => {
 /*
 UPDATE CHAT REQUEST BODY SHOULD BE IN THIS FORMAT
 {
-  "username": "bilal",
-  "chatmate": "usman",
-  "sendername": "Basit",
+  "username": "Basit",
+  "chatmate": "Ali",
+  "sendername": "Ali",
   "message": "HEllo G000000000",
   "timestamp": "2022-08-21T05:10:49.059Z",
   "delivered": true,
   "deliverTime": "2022-08-21T05:10:49.059Z",
   "read": true,
   "readTime": "2022-08-21T05:10:49.059Z"
+}
+?Now this way ->
+{
+  "newMessage":{
+    "username": "basit1",
+    "chatmate": "Basit",
+    "sendername": "basit1",
+    "message": " going crazy and steupid",
+    "timestamp": "2022-08-25T05:10:49.059Z",
+    "delivered": true,
+    "deliverTime": "2022-08-25T05:10:49.059Z",
+    "read": true,
+    "readTime": "2022-08-25T05:10:49.059Z"
+    }
 }
 
 */
