@@ -3,7 +3,6 @@ import React, { useState, FC } from 'react'
 import { useParams } from 'react-router'
 import { ChatType } from '../../Models/Models'
 import Button from '../UI/Button'
-import classes from "./ChatBottom.module.css"
 const username = "Basit"
 const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
     const { id: newRecipient } = useParams()
@@ -74,7 +73,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
 
     }
     return (
-        <form className={classes.main} onSubmit={handlesendMessage} >
+        <form className="" onSubmit={handlesendMessage} >
             <input type="text" onChange={(e) => { return setMessage(e.target.value) }} value={message} />
             {message.length > 0 && <button>Send message</button>}
         </form>

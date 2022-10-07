@@ -5,8 +5,8 @@ import classes from "./ChatHeader.module.css"
 const ChatHeader: FC<{ recipient: string | undefined }> = ({ recipient }) => {
     const { id: newRecipient } = useParams();
     return (
-        <div className={classes.header}>
-            <div className={classes.nameandstatus}>
+        <div className="">
+            <div className="">
                 <div>{recipient ? recipient : newRecipient}</div>
                 <div>Offline</div>
             </div>

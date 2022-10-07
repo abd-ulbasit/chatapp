@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { UserReceivedForNewChatType } from '../../Models/Models'
 import FindUser from './FindUser'
-import classes from "./NewChat.module.css"
 const NewChat = () => {
     const [newUsers, setNewUsers] = useState([])
 
@@ -25,10 +24,10 @@ const NewChat = () => {
 
     }, [])
     return (
-        <div className={classes.main} >
+        <div className="" >
             <FindUser></FindUser>
             {/* //maping the recently joined users to the list */}
-            <div className={classes.newusers} >
+            <div className="" >
                 {newUsers.map(user => {
                     return (
                         <NavLink to={`/chat/${user}`} >{user}</NavLink>

@@ -4,8 +4,6 @@ import ChatBar from './ChatBar'
 import ChatBody from './ChatBox/ChatBody'
 import ChatBottom from './ChatBox/ChatBottom'
 import ChatHeader from './ChatBox/ChatHeader'
-import classes from "./Chat.module.css"
-import Layout from './Layout'
 import { ChatMessageType, ChatType } from '../Models/Models'
 import { useParams } from 'react-router'
 const username = "Basit"
@@ -19,14 +17,14 @@ const Chat: FC<{ chats: ChatType[] }> = ({ chats }) => {
     // console.log(chat)
     return (
         //returning the chat box from here
-        <div className={classes.chatbox}>
-            <div className={classes.header}>
+        <div className="">
+            <div className="">
                 <ChatHeader recipient={chat?.person1 === username ? chat?.person2 : chat?.person1}></ChatHeader>
             </div>
-            <div className={classes.body}>
+            <div className="">
             </div>
             <ChatBody chat={processedChat}></ChatBody>
-            <div className={classes.bottom}>
+            <div className="">
                 <ChatBottom chat={chat}></ChatBottom>
             </div>
         </div>

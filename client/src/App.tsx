@@ -1,10 +1,7 @@
-import './App.css'
 import io from 'socket.io-client'
 import { useEffect } from 'react'
 import { Routes, Route } from "react-router"
-import LogInPage from './components/LogInPage'
 import Chat from './components/Chat'
-import ChatBar from './components/ChatBar'
 import Layout from './components/Layout'
 import React from 'react'
 import axios from 'axios'
