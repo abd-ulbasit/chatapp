@@ -31,7 +31,7 @@ function App() {
     })
   }, [])
   return (
-    <div className="app" >
+    <div className="app " >
       <Layout chats={chats} >
         <Routes>
           <Route path="/new" element={<NewChat></NewChat>} />
