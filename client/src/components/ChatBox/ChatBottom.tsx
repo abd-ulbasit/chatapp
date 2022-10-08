@@ -2,8 +2,9 @@ import axios from 'axios'
 import React, { useState, FC } from 'react'
 import { useParams } from 'react-router'
 import { ChatType } from '../../Models/Models'
-import Button from '../UI/Button'
+import SendIcon from '@mui/icons-material/Send';
 const username = "Basit"
+
 const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
     const { id: newRecipient } = useParams()
     const [message, setMessage] = useState('')
@@ -62,9 +63,6 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
                 }
                 )
             }
-
-
-
             console.log(res.data.message);
         }).catch(err => {
             console.log(err);
@@ -73,9 +71,9 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
 
     }
     return (
-        <form className="" onSubmit={handlesendMessage} >
-            <input type="text" onChange={(e) => { return setMessage(e.target.value) }} value={message} />
-            {message.length > 0 && <button>Send message</button>}
+        <form className="flex border-2 p-2" onSubmit={handlesendMessage} >
+            <input type="text" onChange={(e) => { return setMessage(e.target.value) }} value={message} className="outline-none flex-grow border-2 p-1 rounded-md" />
+            {<button className={`px-3  ${message.length > 0 ? "visible" : "invisible"}`} ><SendIcon></SendIcon></button>}
         </form>
     )
 }

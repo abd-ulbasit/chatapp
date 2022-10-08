@@ -5,12 +5,12 @@ import classes from "./ChatHeader.module.css"
 const ChatHeader: FC<{ recipient: string | undefined }> = ({ recipient }) => {
     const { id: newRecipient } = useParams();
     return (
-        <div className="">
+        <div className="flex justify-between [&>*]:mx-4">
             <div className="">
                 <div>{recipient ? recipient : newRecipient}</div>
                 <div>Offline</div>
             </div>
-            <button>.</button>
+            <button onClick={() => console.log("Button cliked")}>Actions </button>
         </div>
     )
 }

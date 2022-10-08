@@ -4,50 +4,60 @@ import { NavLink } from "react-router-dom"
 import axios from "axios";
 const username = "Basit"
 import { ChatType } from '../Models/Models';
+import AddIcon from '@mui/icons-material/Add';
 
-const sendersMessageStyle = { marginLeft: "0px", marginRight: "auto", width: "fit-content", padding: "5px", borderRadius: "5px", backgroundColor: "#f5f5f5", border: "1px solid #ccc", marginBottom: "5px", marginTop: "5px" };
-const recipientsMessageStyle = { marginLeft: "auto", marginRight: "0px", width: "fit-content", padding: "5px", borderRadius: "5px", backgroundColor: "#f5f5f5", border: "1px solid #ccc", marginBottom: "5px", marginTop: "5px" };
+
+const sendersMessageStyle = { marginLeft: "0px", marginRight: "auto", width: "fit-content", border: "1px solid #ccc", marginBottom: "5px", marginTop: "5px" };
+const recipientsMessageStyle = { marginLeft: "auto", marginRight: "0px", width: "fit-content", border: "1px solid #ccc", marginBottom: "5px", marginTop: "5px" };
 
 
 const ChatBar: FC<{ chats: ChatType[] }> = ({ chats }) => {
 
     // const link = `/chat/${chat._id}`
     return (
-        <div className="">
-            <div className="" >
+        <div className=" md:w-1/3 w-5/12 lg:w-1/4 overflow-y-auto relative  ">
+            <div className="bg-blue-700 sticky w-full top-0 flex justify-between p-3 items-center " >
                 <h3 className="" >{username}</h3>
                 <NavLink to={"new"}
-                    className=""
+                    className=" rounded-full p-2 mr-3 bg-yellow-400"
                     style={({ isActive }) => {
                         return isActive ? {
-                            backgroundColor: "purple",
-                            outline: "3px solid white"
+                            backgroundColor: "yellow"
                         } : {}
                     }} >
-                    +
+                    <AddIcon></AddIcon>
                 </NavLink>
             </div>
             <div className="" >
 
                 {chats.map((chat: ChatType) => {
                     return (
-                        <>
-                            <NavLink to={`chat/${chat._id}`} className="" end
+                        <div className='border m-1  overflow-hidden' key={chat._id} >
+                            <NavLink to={`chat/${chat._id}`} end
                                 style={({ isActive }) => {
-                                    return isActive ? { backgroundColor: "purple" } : {}
+                                    return isActive ? {
+                                        color: "red",
+                                        backgroundColor: "pink",
+                                        border: "2px red solid"
+                                    } : {}
                                 }}
                                 key={chat._id}
+                                className={({ isActive }) => {
+                                    return isActive ? "bg-red-300 scale-105" : ""
+                                }}
                             >
+                                <div className=''>
 
-                                <div className="">
-                                    {chat.person1 === username ? chat.person2 : chat.person1}
-                                </div>
-                                <div className="" style={chat.chat[chat.chat.length - 1].sendername != username ? sendersMessageStyle : recipientsMessageStyle} >
-                                    {chat.chat[chat.chat.length - 1].message}
+                                    <div className="">
+                                        {chat.person1 === username ? chat.person2 : chat.person1}
+                                    </div>
+                                    <div className="truncate rounded-sm" style={chat.chat[chat.chat.length - 1].sendername != username ? sendersMessageStyle : recipientsMessageStyle} >
+                                        {chat.chat[chat.chat.length - 1].message}
+                                    </div>
                                 </div>
                             </NavLink>
 
-                        </>
+                        </div>
                     )
                 })}
             </div>

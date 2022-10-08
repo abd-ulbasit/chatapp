@@ -15,7 +15,7 @@ const NewChat = () => {
                 return eachuser.username
             })
             setNewUsers(users)
-
+            console.log(newUsers.length)
         }).catch(err => {
             console.log(err);
 
@@ -24,15 +24,29 @@ const NewChat = () => {
 
     }, [])
     return (
-        <div className="" >
-            <FindUser></FindUser>
+        <div className="flex  flex-col  sm:flex-row items-stretch h-screen" >
+            <div>
+
+
+                <FindUser></FindUser>
+            </div>
+            <div className='h-5/6 sm:w-1 bg-black py-3 align-middle invisible '></div>
             {/* //maping the recently joined users to the list */}
-            <div className="" >
-                {newUsers.map(user => {
-                    return (
-                        <NavLink to={`/chat/${user}`} >{user}</NavLink>
-                    )
-                })}
+            <div className="flex flex-col align-center justify-center mx-auto" >
+                <h1 className='text-center font-semibold text-2xl'>New USers to the App</h1>
+                <div className='flex  flex-wrap '>
+
+                    {newUsers.map(user => {
+                        // console.log(newUsers.length);
+                        return (
+                            <div className='border w-1/2 mx-auto p-2 m-1 ' >
+                                <NavLink to={`/chat/${user}`} key={user} >
+                                    {user}
+                                </NavLink>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )

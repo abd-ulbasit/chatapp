@@ -9,21 +9,23 @@ import { useParams } from 'react-router'
 const username = "Basit"
 const Chat: FC<{ chats: ChatType[] }> = ({ chats }) => {
     const { id } = useParams();
+    console.log(id);
     const chat: ChatType | undefined = chats.find(c => c._id === id);
+    console.log(chat);
     const processedChat: ChatMessageType[] | undefined = chat?.chat;
-    // console.log(processedChat);
-    //TODO forward prodcessed this chat in the chat body
+    console.log(processedChat);
+    //TODO forward processed this chat in the chat body
     // console.log(chat);
     // console.log(chat)
     return (
         //returning the chat box from here
-        <div className="">
+        <div className="flex flex-col items-stretch h-screen">
             <div className="">
                 <ChatHeader recipient={chat?.person1 === username ? chat?.person2 : chat?.person1}></ChatHeader>
             </div>
-            <div className="">
+            <div className="flex-grow border overflow-scroll">
+                <ChatBody chat={processedChat}></ChatBody>
             </div>
-            <ChatBody chat={processedChat}></ChatBody>
             <div className="">
                 <ChatBottom chat={chat}></ChatBottom>
             </div>

@@ -225,7 +225,7 @@ app.get("/users", async (req, res) => {
     try {
         const users = await User.find({}, { username: 1 })
             .sort({ _id: -1 })
-            .limit(15);
+            .limit(12);
         res.status(200).send(users);
     } catch (error) {
         res.status(500).send(error);

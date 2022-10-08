@@ -28,13 +28,11 @@ function App() {
     })
   }, [])
   return (
-    <div className="app " >
+    <div className="">
       <Layout chats={chats} >
         <Routes>
           <Route path="/new" element={<NewChat></NewChat>} />
           <Route path="/chat/:id" element={<Chat chats={chats} ></Chat>} />
-          <Route path="/new" element={<NewChat></NewChat>} />
-
         </Routes>
       </Layout>
     </div>

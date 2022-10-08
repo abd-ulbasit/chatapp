@@ -3,9 +3,11 @@ import { ChatType } from '../Models/Models'
 import ChatBar from './ChatBar'
 const Layout: FC<{ children: React.ReactNode, chats: ChatType[] }> = ({ chats, children }) => {
     return (
-        <div className="">
+        <div className="flex [&>*]:border [&>*]:border-black h-screen p-0 m-0">
             <ChatBar chats={chats} ></ChatBar>
-            {children}
+            <div className='flex-grow'>
+                {children}
+            </div>
         </div>
     )
 }

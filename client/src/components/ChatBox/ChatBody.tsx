@@ -4,7 +4,7 @@ import ChatBubble from './ChatBubble'
 const ChatBody: FC<{ chat: ChatMessageType[] | undefined }> = ({ chat }) => {
 
     return (
-        <div className="" >
+        <div className="overflow-scroll" >
             {chat?.map((message, index) => {
                 return (
                     <ChatBubble key={index} chat={message} ></ChatBubble>
