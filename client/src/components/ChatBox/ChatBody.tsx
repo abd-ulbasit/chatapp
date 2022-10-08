@@ -1,11 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
+import { SingleChatContext } from '../../contexts/SingleChatContext'
 import { ChatMessageType, ChatType } from '../../Models/Models'
 import ChatBubble from './ChatBubble'
-const ChatBody: FC<{ chat: ChatMessageType[] | undefined }> = ({ chat }) => {
-
+const ChatBody: FC = () => {
+    const SinglechatCtx = useContext(SingleChatContext);
     return (
         <div className="overflow-scroll" >
-            {chat?.map((message, index) => {
+            {SinglechatCtx.singleChat?.chat && SinglechatCtx.singleChat?.chat.map((message, index) => {
                 return (
                     <ChatBubble key={index} chat={message} ></ChatBubble>
                 )

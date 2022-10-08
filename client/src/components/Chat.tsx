@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { Routes, Route } from 'react-router'
 import ChatBar from './ChatBar'
 import ChatBody from './ChatBox/ChatBody'
@@ -6,17 +6,23 @@ import ChatBottom from './ChatBox/ChatBottom'
 import ChatHeader from './ChatBox/ChatHeader'
 import { ChatMessageType, ChatType } from '../Models/Models'
 import { useParams } from 'react-router'
+import { ChatContext } from '../contexts/ChatsContext';
+import { SingleChatContext } from '../contexts/SingleChatContext'
 const username = "Basit"
-const Chat: FC<{ chats: ChatType[] }> = ({ chats }) => {
+const Chat: FC = () => {
+    const { setSingleChat } = useContext(SingleChatContext)
+    const { chats } = useContext(ChatContext);
+    console.log(chats);
     const { id } = useParams();
     console.log(id);
-    const chat: ChatType | undefined = chats.find(c => c._id === id);
-    console.log(chat);
-    const processedChat: ChatMessageType[] | undefined = chat?.chat;
-    console.log(processedChat);
+    const chat = chats?.find(c => c._id === id);
+    if (chat) {
+        setSingleChat(chat);
+    }
+
     //TODO forward processed this chat in the chat body
     // console.log(chat);
-    // console.log(chat)
+    // console.log(chat);
     return (
         //returning the chat box from here
         <div className="flex flex-col items-stretch h-screen">
@@ -24,7 +30,7 @@ const Chat: FC<{ chats: ChatType[] }> = ({ chats }) => {
                 <ChatHeader recipient={chat?.person1 === username ? chat?.person2 : chat?.person1}></ChatHeader>
             </div>
             <div className="flex-grow border overflow-scroll">
-                <ChatBody chat={processedChat}></ChatBody>
+                <ChatBody ></ChatBody>
             </div>
             <div className="">
                 <ChatBottom chat={chat}></ChatBottom>

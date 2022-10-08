@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { UserReceivedForNewChatType } from '../../Models/Models'
+import { User } from '../../Models/Models'
 import FindUser from './FindUser'
 const NewChat = () => {
     const [newUsers, setNewUsers] = useState([])
@@ -11,7 +11,7 @@ const NewChat = () => {
     }, [])
     useEffect(() => {
         axios.get(`http://localhost:3000/users`).then(res => {
-            const users = res.data.map((eachuser: UserReceivedForNewChatType) => {
+            const users = res.data.map((eachuser: User) => {
                 return eachuser.username
             })
             setNewUsers(users)
@@ -40,7 +40,7 @@ const NewChat = () => {
                         // console.log(newUsers.length);
                         return (
                             <div className='border w-1/2 mx-auto p-2 m-1 ' >
-                                <NavLink to={`/chat/${user}`} key={user} >
+                                <NavLink to={`/newchat/${user}`} key={user} >
                                     {user}
                                 </NavLink>
                             </div>

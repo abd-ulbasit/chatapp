@@ -1,11 +1,13 @@
 import axios from 'axios'
-import React, { useState, FC } from 'react'
+import React, { useState, FC, useContext } from 'react'
 import { useParams } from 'react-router'
-import { ChatType } from '../../Models/Models'
+import { ChatMessageType, ChatType } from '../../Models/Models'
 import SendIcon from '@mui/icons-material/Send';
+import { SingleChatContext } from '../../contexts/SingleChatContext';
 const username = "Basit"
 
 const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
+    const SingleChatCtx = useContext(SingleChatContext)
     const { id: newRecipient } = useParams()
     const [message, setMessage] = useState('')
     const handlesendMessage = (e: React.FormEvent<HTMLFormElement> | undefined) => {
@@ -22,6 +24,21 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
             deliveryTime: new Date(),
             readTime: new Date()
         }
+        const newMessageToAppend: ChatMessageType = {
+            message,
+            sendername: username,
+            receiver: {
+                delivery: {
+                    delivered: false,
+                    deliveryTime: (new Date()).toISOString()
+                },
+                reading: {
+                    read: false,
+                    readTime: (new Date()).toISOString()
+                }
+            },
+            timestamp: (new Date()).toISOString(),
+        }
         console.log(chat?.person1 === username ? chat?.person2 : chat?.person1,)
         console.log(chat?.person2, chat?.person1)
             ;
@@ -29,9 +46,28 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
         axios.patch("http://localhost:3000/updatechat", {
             newMessage
         }).then(res => {
+            // SingleChatCtx.setSingleChat((prev) => {
+            //     return prev?.chat?.push(newMessageToAppend);
+            // })
             if (res.data.message === "failed") {
 
-                //?it means that the user is not in the database
+                //?it means that the user is not in the database;
+                // const newChatChat ={
+                //     id: "1",
+                //     sendername: username,
+                //     message: message,
+                //     timestamp: new Date().toISOString(),
+                //     receiver: {
+                //         delivery: {
+                //             delivered: false,
+                //             deliveryTime: new Date().toISOString(),
+                //         },
+                //         reading: {
+                //             read: false,
+                //             readTime: new Date().toISOString()
+                //         }
+                //     }
+                // }
                 const newChat: ChatType = {
                     person1: username,
                     person2: newRecipient,
@@ -57,6 +93,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
                     newChat
                 }).then(res => {
                     console.log(res.data);
+                    SingleChatCtx.setSingleChat(newChat);
                 }
                 ).catch(err => {
                     console.log(err);
@@ -75,7 +112,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
             <input type="text" onChange={(e) => { return setMessage(e.target.value) }} value={message} className="outline-none flex-grow border-2 p-1 rounded-md" />
             {<button className={`px-3  ${message.length > 0 ? "visible" : "invisible"}`} ><SendIcon></SendIcon></button>}
         </form>
-    )
+    );
 }
 
 export default ChatBottom;

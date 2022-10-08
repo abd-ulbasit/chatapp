@@ -2,7 +2,7 @@ export interface ChatType {
     _id ?: string;
     person1: string,
     person2: string |undefined,
-    chat: [{
+    chat ?: [{
         message: string,
         sendername: string,
         timestamp: string 
@@ -25,7 +25,7 @@ export interface ChatMessageType{
     message: string,
     sendername: string,
     timestamp: string
-    id: string
+    id?: string
     receiver: {
         delivery: {
             delivered: boolean,
@@ -38,7 +38,7 @@ export interface ChatMessageType{
 
     }
 }
-export interface UserReceivedForNewChatType{
+export interface User{
     username:String;
     _id:String;
 }

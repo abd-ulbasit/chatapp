@@ -1,12 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { UserReceivedForNewChatType } from '../../Models/Models'
-
+import { User } from '../../Models/Models'
+const username = "Basit"
 const FindUser = () => {
     const [searchInitialized, setSearchInitialized] = useState<boolean>(false);
     const [search, setSearch] = React.useState('');
-    const [foundusers, setFoundUsers] = React.useState([]);
+    const [foundusers, setFoundUsers] = React.useState<User[]>([]);
     const [loading, setLoading] = useState<boolean>();
     const handleFindUser = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -34,7 +34,10 @@ const FindUser = () => {
                 setSearchInitialized(true);
                 setLoading(false);
                 if (res.data.length > 0) {
-                    setFoundUsers(res.data);
+                    const fetchedUsers: User[] = res.data;
+                    const usersexceptme = fetchedUsers.filter((e) => e.username != username)
+                    setFoundUsers(usersexceptme);
+                    setFoundUsers(res.data)
                 }
             }
             ).catch(err => {
@@ -56,10 +59,10 @@ const FindUser = () => {
             </form>
             {
                 foundusers.length > 0 && <div>
-                    {foundusers.map((eachuser: UserReceivedForNewChatType, index) => {
+                    {foundusers.map((eachuser: User, index) => {
                         return (
                             <div key={index} className="border" >
-                                <NavLink to={`/chat/${eachuser.username}`} >{eachuser.username}</NavLink>
+                                <NavLink to={`/newchat/${eachuser.username}`} >{eachuser.username}</NavLink>
                             </div>
                         )
                     })}
@@ -76,5 +79,4 @@ const FindUser = () => {
         </div>
     )
 }
-
 export default FindUser

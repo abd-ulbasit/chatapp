@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FC } from 'react';
 import { NavLink } from "react-router-dom"
 import axios from "axios";
 const username = "Basit"
 import { ChatType } from '../Models/Models';
 import AddIcon from '@mui/icons-material/Add';
-
+import { ChatContext } from '../contexts/ChatsContext';
 
 const sendersMessageStyle = { marginLeft: "0px", marginRight: "auto", width: "fit-content", border: "1px solid #ccc", marginBottom: "5px", marginTop: "5px" };
 const recipientsMessageStyle = { marginLeft: "auto", marginRight: "0px", width: "fit-content", border: "1px solid #ccc", marginBottom: "5px", marginTop: "5px" };
 
 
-const ChatBar: FC<{ chats: ChatType[] }> = ({ chats }) => {
-
+const ChatBar: FC = () => {
+    const chatsCtx = useContext(ChatContext);
     // const link = `/chat/${chat._id}`
     return (
         <div className=" md:w-1/3 w-5/12 lg:w-1/4 overflow-y-auto relative  ">
@@ -30,7 +30,7 @@ const ChatBar: FC<{ chats: ChatType[] }> = ({ chats }) => {
             </div>
             <div className="" >
 
-                {chats.map((chat: ChatType) => {
+                {chatsCtx.chats!.map((chat: ChatType) => {
                     return (
                         <div className='border m-1  overflow-hidden' key={chat._id} >
                             <NavLink to={`chat/${chat._id}`} end
@@ -51,8 +51,8 @@ const ChatBar: FC<{ chats: ChatType[] }> = ({ chats }) => {
                                     <div className="">
                                         {chat.person1 === username ? chat.person2 : chat.person1}
                                     </div>
-                                    <div className="truncate rounded-sm" style={chat.chat[chat.chat.length - 1].sendername != username ? sendersMessageStyle : recipientsMessageStyle} >
-                                        {chat.chat[chat.chat.length - 1].message}
+                                    <div className="truncate rounded-sm" style={chat.chat ? chat.chat[chat.chat.length - 1].sendername != username ? sendersMessageStyle : recipientsMessageStyle : {}} >
+                                        {chat.chat && chat.chat[chat.chat.length - 1].message}
                                     </div>
                                 </div>
                             </NavLink>
