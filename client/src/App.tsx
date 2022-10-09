@@ -50,8 +50,7 @@ export default App
 
 function sortchatswrtTime(chats: ChatType[]) {
   chats.sort(function (a, b) {
-    if (a.chat && b.chat) {
-      return (a.chat[a.chat.length - 1].timestamp < b.chat[b.chat.length - 1].timestamp) ? 1 : -1
-    }
+
+    return (a.chat![a.chat!.length - 1].timestamp < b.chat![b.chat!.length - 1].timestamp) ? 1 : -1
   })
 }

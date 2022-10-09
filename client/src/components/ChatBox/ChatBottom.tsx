@@ -51,7 +51,8 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
             // })
             if (res.data.message === "failed") {
 
-                //?it means that the user is not in the database;
+                console.log("Chat Not in the database:")
+                //?it means that the Chat is not in the database;
                 // const newChatChat ={
                 //     id: "1",
                 //     sendername: username,
