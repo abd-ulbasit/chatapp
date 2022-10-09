@@ -35,7 +35,6 @@ export interface ChatMessageType{
             read: boolean
             readTime: string
         }
-
     }
 }
 export interface User{

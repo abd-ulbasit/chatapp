@@ -15,7 +15,7 @@ const io = new Server(httpServer, {
 app.use(cors());
 app.use(express.json());
 io.on("connection", (socket) => {
-    console.log("New client connected " + socket.id);
+    // console.log("New client connected " + socket.id);
 });
 httpServer.listen(3000);
 const uri =
@@ -35,7 +35,7 @@ app.post("/newchat", async (req, res) => {
     const newMessage = req.body.newChat;
     console.log(newMessage);
     const newChat = new Chat(newMessage);
-    console.log(newChat);
+    // console.log(newChat);
     // console.log(req.body.);
     try {
         await newChat.save();
@@ -115,14 +115,26 @@ app.patch("/updatechat", async (req, res) => {
             }
         );
         if (responsefromdb.modifiedCount === 1) {
+            console.log("Updated one");
             res.status(204).send({ message: "updated" });
         } else {
             //TODO handle this case : user donot exist create a  new chat with this user and send the message to this user
             res.status(200).send({ message: "failed" });
 
             // res.status(400).send({ error: "message not updated" });
+            // const newMessage = req.body.newChat;
+            // console.log(newMessage);
+            // const newChat = new Chat(newMessage);
+            // console.log(newChat);
+            // // console.log(req.body.);
+            // try {
+            //     await newChat.save();
+            //     res.status(201).send(newChat);
+            // } catch (error) {
+            //     res.status(400).send(error);
+            // }
         }
-        console.log();
+        // console.log();
     } catch (error) {
         res.status(500).send(error);
     }
@@ -185,7 +197,7 @@ NEW CHAT REQUEST BODY SHOULD BE IN THIS FORMAT
 
 app.post("/newuser", async (req, res) => {
     const userInDB = await User.find({ username: req.body.username });
-    console.log(userInDB);
+    // console.log(userInDB);
     if (userInDB.length > 0) {
         res.status(200).send(
             JSON.stringify({ message: "User Already Exists" })
@@ -193,7 +205,7 @@ app.post("/newuser", async (req, res) => {
         return;
     }
     const newUser = new User(req.body);
-    console.log(newUser);
+    // console.log(newUser);
     try {
         await newUser.save();
         res.status(201).send(newUser);
@@ -202,7 +214,7 @@ app.post("/newuser", async (req, res) => {
     }
 });
 app.post("/users", async (req, res) => {
-    console.log(req.body.username);
+    // console.log(req.body.username);
     try {
         const user = await User.findOne({
             $and: [

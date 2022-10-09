@@ -48,7 +48,7 @@ function App() {
 export default App
 
 
-function sortchatswrtTime(chats: ChatType[]) {
+export function sortchatswrtTime(chats: ChatType[]) {
   chats.sort(function (a, b) {
 
     return (a.chat![a.chat!.length - 1].timestamp < b.chat![b.chat!.length - 1].timestamp) ? 1 : -1
