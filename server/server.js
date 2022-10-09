@@ -213,27 +213,27 @@ app.post("/newuser", async (req, res) => {
         res.status(400).send(error);
     }
 });
-app.post("/users", async (req, res) => {
-    // console.log(req.body.username);
-    try {
-        const user = await User.findOne({
-            $and: [
-                { username: req.body.username },
-                { password: req.body.password },
-            ],
-        });
-        if (user) {
-            res.status(200).send(user);
-        } else {
-            res.status(200).send({
-                message: "User Not Found",
-            });
-        }
-    } catch (error) {
-        res.status(500).send(error);
-    }
-});
-app.get("/users", async (req, res) => {
+// app.post("/users", async (req, res) => {
+//     // console.log(req.body.username);
+//     try {
+//         const user = await User.findOne({
+//             $and: [
+//                 { username: req.body.username },
+//                 { password: req.body.password },
+//             ],
+//         });
+//         if (user) {
+//             res.status(200).send(user);
+//         } else {
+//             res.status(200).send({
+//                 message: "User Not Found",
+//             });
+//         }
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// });
+app.get("/newusers", async (req, res) => {
     try {
         const users = await User.find({}, { username: 1 })
             .sort({ _id: -1 })
@@ -257,6 +257,64 @@ app.get("/finduser", async (req, res) => {
             res.status(200).send({
                 message: "User Not Found",
             });
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+app.post("/newuser", async (req, res) => {
+    const userInDB = await User.find({ username: req.body.username });
+    // console.log(userInDB);
+    if (userInDB.length > 0) {
+        res.status(200).send(
+            JSON.stringify({ message: "User Already Exists" })
+        );
+        return;
+    }
+    const newUser = new User(req.body);
+    // console.log(newUser);
+    try {
+        await newUser.save();
+        res.status(201).send(newUser);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+app.post("/users", async (req, res) => {
+    // console.log(req.body.username);
+    try {
+        const user = await User.findOne({
+            $and: [
+                { username: req.body.username },
+                { password: req.body.password },
+            ],
+        });
+        if (user) {
+            // console.log(user);
+            res.status(200).send(user);
+        } else {
+            try {
+                const user = await User.findOne({
+                    $or: [
+                        { username: req.body.username },
+                        { password: req.body.password },
+                    ],
+                });
+                // console.log(user);
+                if (user) {
+                    // console.log(user);
+                    console.log(202);
+                    res.status(202).send({
+                        message: "wrong",
+                    });
+                } else {
+                    res.status(204).send({
+                        message: "User Not Found",
+                    });
+                }
+            } catch (err) {
+                res.status(500).send(err);
+            }
         }
     } catch (error) {
         res.status(500).send(error);

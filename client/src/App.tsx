@@ -9,6 +9,9 @@ import { ChatType } from "./Models/Models"
 import NewChat from './components/NewChat/NewChat'
 import NewChatWithUser from './components/NewChatWithUser'
 import { ChatContext } from './contexts/ChatsContext'
+import { AuthContext } from './contexts/AuthContext'
+import NotFound from './components/UI/NotFound'
+import LogInPage from './components/login/LogInPage'
 const username = "Basit"
 // const socket = io('http://localhost:3000', {
 //   query: {
@@ -17,6 +20,7 @@ const username = "Basit"
 // })
 
 function App() {
+  const authCtx = useContext(AuthContext);
   const ChatsCtx = useContext(ChatContext);
   // const [chats, setChats] = React.useState<ChatType[]>([])
   useEffect(() => {
@@ -32,15 +36,26 @@ function App() {
     })
   }, [])
   return (
-    <div className="">
-      <Layout >
+    <div className='dark'>
+      {authCtx.userName &&
+        <div className="">
+          <Layout >
+            <Routes>
+              <Route path="/" element={<div>Hello</div>} />
+              <Route path="/new" element={<NewChat></NewChat>} />
+              <Route path="/chat/:id" element={<Chat></Chat>} />
+              <Route path="/newchat/:id" element={<NewChatWithUser></NewChatWithUser>} />
+            </Routes>
+          </Layout>
+        </div>
+      }
+      {!authCtx.userName &&
         <Routes>
-          <Route path="/" element={<div>Hello</div>} />
-          <Route path="/new" element={<NewChat></NewChat>} />
-          <Route path="/chat/:id" element={<Chat></Chat>} />
-          <Route path="/newchat/:id" element={<NewChatWithUser></NewChatWithUser>} />
+          <Route path='/' element={<LogInPage></LogInPage>} />
+          <Route path='/*' element={<NotFound></NotFound>} />
         </Routes>
-      </Layout>
+
+      }
     </div>
   )
 }

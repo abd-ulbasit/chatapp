@@ -10,7 +10,7 @@ const NewChat = () => {
 
     }, [])
     useEffect(() => {
-        axios.get(`http://localhost:3000/users`).then(res => {
+        axios.get(`http://localhost:3000/newusers`).then(res => {
             const users = res.data.map((eachuser: User) => {
                 return eachuser.username
             })
