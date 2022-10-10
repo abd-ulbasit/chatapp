@@ -1,9 +1,11 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthContext'
 import { User } from '../../Models/Models'
-const username = "Basit"
 const FindUser = () => {
+
+    const { userName: username } = useContext(AuthContext);
     const [searchInitialized, setSearchInitialized] = useState<boolean>(false);
     const [search, setSearch] = React.useState('');
     const [foundusers, setFoundUsers] = React.useState<User[]>([]);

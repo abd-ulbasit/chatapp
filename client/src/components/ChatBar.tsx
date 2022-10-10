@@ -2,16 +2,18 @@ import React, { useContext, useEffect } from 'react'
 import { FC } from 'react';
 import { NavLink } from "react-router-dom"
 import axios from "axios";
-const username = "Basit"
 import { ChatType } from '../Models/Models';
 import AddIcon from '@mui/icons-material/Add';
 import { ChatContext } from '../contexts/ChatsContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 const sendersMessageStyle = { marginLeft: "0px", marginRight: "auto", width: "fit-content", border: "1px solid #ccc", marginBottom: "5px", marginTop: "5px" };
 const recipientsMessageStyle = { marginLeft: "auto", marginRight: "0px", width: "fit-content", border: "1px solid #ccc", marginBottom: "5px", marginTop: "5px" };
 
 
 const ChatBar: FC = () => {
+
+    const { userName: username } = useContext(AuthContext);
     const chatsCtx = useContext(ChatContext);
     // const link = `/chat/${chat._id}`
     return (

@@ -12,7 +12,6 @@ import { ChatContext } from './contexts/ChatsContext'
 import { AuthContext } from './contexts/AuthContext'
 import NotFound from './components/UI/NotFound'
 import LogInPage from './components/login/LogInPage'
-const username = "Basit"
 // const socket = io('http://localhost:3000', {
 //   query: {
 //     id: '123basit'
@@ -20,8 +19,9 @@ const username = "Basit"
 // })
 
 function App() {
-  const authCtx = useContext(AuthContext);
+  const { userName: username } = useContext(AuthContext);
   const ChatsCtx = useContext(ChatContext);
+
   // const [chats, setChats] = React.useState<ChatType[]>([])
   useEffect(() => {
     axios.get(`http://localhost:3000/chats?username=${username}`,
@@ -37,7 +37,7 @@ function App() {
   }, [])
   return (
     <div className='dark'>
-      {authCtx.userName &&
+      {username &&
         <div className="">
           <Layout >
             <Routes>
@@ -49,7 +49,7 @@ function App() {
           </Layout>
         </div>
       }
-      {!authCtx.userName &&
+      {!username &&
         <Routes>
           <Route path='/' element={<LogInPage></LogInPage>} />
           <Route path='/*' element={<NotFound></NotFound>} />

@@ -5,9 +5,11 @@ import { ChatMessageType, ChatType } from '../../Models/Models'
 import SendIcon from '@mui/icons-material/Send';
 import { SingleChatContext } from '../../contexts/SingleChatContext';
 import { ChatContext } from '../../contexts/ChatsContext';
-const username = "Basit"
 import { sortchatswrtTime } from "../../App"
+import { AuthContext } from '../../contexts/AuthContext';
 const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
+
+    const { userName: username } = useContext(AuthContext);
     const SingleChatCtx = useContext(SingleChatContext);
     const { setSingleChat } = useContext(SingleChatContext)
     const ChatsCtx = useContext(ChatContext);
@@ -29,7 +31,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
         }
         const newMessageToAppend: ChatMessageType = {
             message,
-            sendername: username,
+            sendername: username!,
             receiver: {
                 delivery: {
                     delivered: false,
@@ -72,11 +74,11 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
                 //     }
                 // }
                 const newChat: ChatType = {
-                    person1: username,
+                    person1: username!,
                     person2: newRecipient,
                     chat: [{
                         id: "1",
-                        sendername: username,
+                        sendername: username!,
                         message: message,
                         timestamp: new Date().toISOString(),
                         receiver: {

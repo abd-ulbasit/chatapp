@@ -8,8 +8,9 @@ import { ChatMessageType, ChatType } from '../Models/Models'
 import { useParams } from 'react-router'
 import { ChatContext } from '../contexts/ChatsContext';
 import { SingleChatContext } from '../contexts/SingleChatContext'
-const username = "Basit"
+import { AuthContext } from '../contexts/AuthContext'
 const Chat: FC = () => {
+    const { userName: username } = useContext(AuthContext);
     const { setSingleChat } = useContext(SingleChatContext)
     const { chats } = useContext(ChatContext);
     console.log(chats);

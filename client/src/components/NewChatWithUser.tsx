@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
+import { AuthContext } from '../contexts/AuthContext';
 import { ChatContext } from '../contexts/ChatsContext';
 import { SingleChatContext } from '../contexts/SingleChatContext';
 import { ChatType } from '../Models/Models';
-const username = "Basit"
 const NewChatWithUser = () => {
+
+    const { userName: username } = useContext(AuthContext);
     const navigate = useNavigate();
     const { chats } = useContext(ChatContext);
     const { setSingleChat } = useContext(SingleChatContext)
@@ -31,7 +33,7 @@ const NewChatWithUser = () => {
             useEffect(() => {
                 //starting a new Chat 
                 const newChat: ChatType = {
-                    person1: username,
+                    person1: username!,
                     person2: id,
 
                 }
