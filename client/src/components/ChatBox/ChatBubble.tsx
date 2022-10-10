@@ -6,7 +6,7 @@ const ChatBubble: FC<{ chat: ChatMessageType | undefined }> = ({ chat }) => {
     const { userName: username } = useContext(AuthContext);
     return (
 
-        <div className={`block clear-both border rounded-full px-3 max-w-[80%] m-2 w-fit  ${chat!.sendername == username ? "float-right" : ""}`}
+        <div className={`block clear-both border rounded-full px-3 max-w-[80%] m-2 w-fit  col-span-12 ${chat!.sendername == username ? "ml-auto" : ""}`}
             ref={divRef}>
             {chat?.message}
         </div>
