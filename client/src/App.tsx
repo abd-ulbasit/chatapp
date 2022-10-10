@@ -34,7 +34,7 @@ function App() {
       // setChats(receivedChats)
       // console.log(chats)
     })
-  }, [])
+  }, [username])
   return (
     <div className='dark'>
       {username &&
