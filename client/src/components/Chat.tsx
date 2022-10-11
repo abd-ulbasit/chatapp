@@ -13,9 +13,9 @@ const Chat: FC = () => {
     const { userName: username } = useContext(AuthContext);
     const { setSingleChat } = useContext(SingleChatContext)
     const { chats } = useContext(ChatContext);
-    console.log(chats);
+    // console.log(chats);
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
     const chat = chats?.find(c => c._id === id);
     if (chat) {
         setSingleChat(chat);

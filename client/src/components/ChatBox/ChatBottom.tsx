@@ -1,12 +1,15 @@
 import axios from 'axios'
 import React, { useState, FC, useContext } from 'react'
 import { useParams } from 'react-router'
-import { ChatMessageType, ChatType } from '../../Models/Models'
+import { ChatMessageType, ChatType, message } from '../../Models/Models'
 import SendIcon from '@mui/icons-material/Send';
 import { SingleChatContext } from '../../contexts/SingleChatContext';
+import { io } from "socket.io-client"
 import { ChatContext } from '../../contexts/ChatsContext';
 import { sortchatswrtTime } from "../../App"
 import { AuthContext } from '../../contexts/AuthContext';
+const socket = io('http://localhost:3000', { protocols: 'echo-protocol' })
+socket.emit('connection');
 const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
 
     const { userName: username } = useContext(AuthContext);
@@ -18,6 +21,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
     const handlesendMessage = (e: React.FormEvent<HTMLFormElement> | undefined) => {
         e?.preventDefault();
         if (message.length === 0) return;
+
         const newMessage = {
             username: username,
             chatmate: chat?.person1 === username ? chat?.person2 : chat?.person1 || newRecipient,
@@ -29,6 +33,36 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
             deliveryTime: new Date(),
             readTime: new Date()
         }
+        socket.emit('message', newMessage);
+        socket.on('forward-message', (data) => {
+            if (data.chatmate === username) {
+                // console.log("Its sent to me")
+                console.log(data.message);
+                const chatToshow: message = {
+                    message: data.message,
+                    sendername: data.username,
+                    timestamp: new Date().toISOString(),
+                    id: Math.random().toString(),
+                    receiver: {
+                        delivery: {
+                            delivered: false,
+                            deliveryTime: new Date().toISOString(),
+                        },
+                        reading: {
+                            read: false,
+                            readTime: new Date().toISOString(),
+                        }
+                    }
+                }
+                setSingleChat((prev: ChatType) => {
+                    return prev.chat?.concat(chatToshow);
+                })
+            }
+
+            // setSingleChat((prev) => {
+            //     prev?.chat?.concat(data)
+            // })
+        })
         const newMessageToAppend: ChatMessageType = {
             message,
             sendername: username!,

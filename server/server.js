@@ -6,17 +6,47 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const app = express();
 const User = require("./models/User");
+const { Socket } = require("dgram");
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
+// const io = new Server(httpServer, {
+//     cors: {
+//         origin: "http://localhost:5173",
+//     },
+// });
+app.use(
+    cors({
+        origin: ["http://localhost:5173", "*"],
+    })
+);
+app.use(express.json());
+// io.on("connection", (socket) => {
+//     // console.log("New client connected " + socket.id);
+// });
+const socketIO = require("socket.io")(httpServer, {
     cors: {
-        origin: "http://localhost:5173",
+        origin: ["http://localhost:5173", "*"],
     },
 });
-app.use(cors());
-app.use(express.json());
-io.on("connection", (socket) => {
-    // console.log("New client connected " + socket.id);
+// socketIO
+//Add this before the app.get() block
+socketIO.on("connection", (socket) => {
+    console.log(`⚡: ${socket.id} user just connected!`);
+    socket.on("disconnect", () => {
+        console.log("🔥: A user disconnected");
+    });
+    socket.on("message", (data) => {
+        // console.log(data);
+        console.log("Broadcasting it to the world");
+        // socket.emit("forward-message", data);
+        // socket.broadcast.emit("forward-message", data);
+        socketIO.sockets.emit("forward-message", data);
+    });
 });
+// const clients = socketIO.;
+// console.log(clients);
+// setInterval(() => {
+//     console.log(clients);
+// }, 2000);
 httpServer.listen(3000);
 const uri =
     "mongodb+srv://admin:admin@learn-next.7nvta2d.mongodb.net/ChatApp?retryWrites=true&w=majority";
