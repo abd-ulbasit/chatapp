@@ -8,6 +8,7 @@ import { io } from "socket.io-client"
 import { ChatContext } from '../../contexts/ChatsContext';
 import { sortchatswrtTime } from "../../App"
 import { AuthContext } from '../../contexts/AuthContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 const socket = io('http://localhost:3000', { protocols: 'echo-protocol' })
 socket.emit('connection');
 const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
@@ -16,6 +17,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
     const SingleChatCtx = useContext(SingleChatContext);
     const { setSingleChat } = useContext(SingleChatContext)
     const ChatsCtx = useContext(ChatContext);
+    const { dark } = useContext(ThemeContext)
     const { id: newRecipient } = useParams()
     const [message, setMessage] = useState('');
     socket.on('forward-message', (data) => {
@@ -35,6 +37,11 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
                 // setChats(receivedChats)
                 // console.log(chats);
             })
+            // console.log("updating the chat");
+            // axios.get(`http://localhost:3000/getupdatedChat?user1=${username}&user2=${data.chatmate}`).then((res) => {
+            //     console.log(res);
+            //     setSingleChat(res.data)
+            // })
         }
     })
     const handlesendMessage = (e: React.FormEvent<HTMLFormElement> | undefined) => {
@@ -204,9 +211,9 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
         setMessage('')
     }
     return (
-        <form className="flex border-2 p-2" onSubmit={handlesendMessage} >
-            <input type="text" onChange={(e) => { return setMessage(e.target.value) }} value={message} className="outline-none flex-grow border-2 p-1 rounded-md" />
-            {<button className={`px-3  ${message.length > 0 ? "visible" : "invisible"}`} ><SendIcon></SendIcon></button>}
+        <form className="flex p-2  bg-primary-200 dark:bg-primary-400  border-t border-t-primary-500" onSubmit={handlesendMessage} >
+            <input type="text" onChange={(e) => { return setMessage(e.target.value) }} value={message} className="outline-none flex-grow text-grey-900 border-2 p-1 rounded-md" />
+            {<button className={`px-3  ${message.length > 0 ? "visible" : "invisible"}`} ><SendIcon style={{ color: dark ? "white" : "darkgreen" }} ></SendIcon></button>}
         </form>
     );
 }

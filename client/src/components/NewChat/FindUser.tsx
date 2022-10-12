@@ -52,8 +52,8 @@ const FindUser = () => {
         }
     }, [search])
     return (
-        <div className='flex flex-col mx-8  my-3 px-2'>
-            <div>Find User</div>
+        <div className='flex flex-col mx-8  sm:my-3 px-auto border [&>*]:py-2 '>
+            <div className='font-semibold text-lg text-center'>Find User</div>
             <form onSubmit={handleFindUser} className="w-full
             flex" >
                 <input type="text" value={search} onChange={handleSearchInputChange} className="flex-grow p-2 rounded-lg" />
@@ -63,9 +63,11 @@ const FindUser = () => {
                 foundusers.length > 0 && <div>
                     {foundusers.map((eachuser: User, index) => {
                         return (
-                            <div key={index} className="border" >
-                                <NavLink to={`/newchat/${eachuser.username}`} >{eachuser.username}</NavLink>
-                            </div>
+                            <NavLink to={`/newchat/${eachuser.username}`} >
+                                <div key={index} className="border rounded-full px-2 text-center my-1 hover:scale-[1.02] hover:bg-primary-500" >
+                                    {eachuser.username}
+                                </div>
+                            </NavLink>
                         )
                     })}
                 </div>

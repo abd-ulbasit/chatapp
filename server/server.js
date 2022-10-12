@@ -149,6 +149,7 @@ app.patch("/updatechat", async (req, res) => {
             res.status(204).send({ message: "updated" });
         } else {
             //TODO handle this case : user donot exist create a  new chat with this user and send the message to this user
+            //? handles already in ohter place no worries
             res.status(200).send({ message: "failed" });
 
             // res.status(400).send({ error: "message not updated" });
@@ -169,7 +170,35 @@ app.patch("/updatechat", async (req, res) => {
         res.status(500).send(error);
     }
 });
-
+app.get("/getupdatedChat", async (req, res) => {
+    console.log(req.query.user1);
+    try {
+        const updatedChat = await Chat.findOne({
+            $or: [
+                {
+                    $and: [
+                        { person1: req.query.user1 },
+                        { person2: req.query.user2 },
+                    ],
+                },
+                {
+                    $and: [
+                        { person2: req.query.user1 },
+                        { person1: req.query.user2 },
+                    ],
+                },
+            ],
+        });
+        res.status(200).send(updatedChat);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+/**
+ * get updated chat request should be like this:
+ * http://localhost:3000/getupdatedChat?user1=basit&user2=Basit
+ *
+ */
 /*
 UPDATE CHAT REQUEST BODY SHOULD BE IN THIS FORMAT
 {

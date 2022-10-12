@@ -26,11 +26,11 @@ const Chat: FC = () => {
     // console.log(chat);
     return (
         //returning the chat box from here
-        <div className="flex flex-col items-stretch h-screen">
+        <div className="flex flex-col items-stretch h-screen [&>*]:m-0 border-primary-600 bg-primary-200 dark:bg-primary-400">
             <div className="">
                 <ChatHeader recipient={chat?.person1 === username ? chat?.person2 : chat?.person1}></ChatHeader>
             </div>
-            <div className="flex-grow border overflow-scroll">
+            <div className="flex-grow  overflow-scroll">
                 <ChatBody ></ChatBody>
             </div>
             <div className="">

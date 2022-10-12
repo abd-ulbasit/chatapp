@@ -56,7 +56,7 @@ const LogInForm = () => {
         setHasAccount((prev) => !prev)
     }
     return (
-        <div className='bg-slate-400 p-8 rounded-xl shadow-2xl dark:bg-slate-300 text-slate-800' >
+        <div className='bg-primary-400 p-8 rounded-xl shadow-2xl dark:bg-primary-300 text-primary-800' >
             <form onSubmit={handleformsubmit} >
 
                 <div className='text-3xl  font-semibold  text-center'>{hasAccount ? "Sign In" : "Sign Up"}</div>
@@ -67,7 +67,7 @@ const LogInForm = () => {
                             <label className='mb-6'>UserName</label>
                         </div>
                         <input type="text" className='p-1 rounded-md border-2 w-full
-                    focus:border-slate-900 text-slate-600 font-semibold outline-0'value={username} minLength={5} onChange={handleUsernameChange} />
+                    focus:border-primary-900 text-primary-600 font-semibold outline-0'value={username} minLength={5} onChange={handleUsernameChange} />
                     </div>
                     <div className='w-100 mb-2'>
                         <div>
@@ -75,13 +75,13 @@ const LogInForm = () => {
                         </div>
                         <input type="password" minLength={5} value={password} className='p-1 rounded-md border-2 
                         tracking-widest w-full
-                    focus:border-slate-900 text-slate-600 font-semibold outline-0' onChange={handlePasswordChange} />
+                    focus:border-primary-900 text-primary-600 font-semibold outline-0' onChange={handlePasswordChange} />
                     </div>
                 </div>
                 <div className='text-red-700 italic font-light text-sm' >{errorMessage}</div>
-                <button className='p-2 box-border border-2 hover:text-white border-slate-700 w-full rounded-lg  font-semibold hover:scale-[1.02] hover:bg-slate-500 focus:cursor-wait transition-all'>{hasAccount ? "LogIn" : "SignUp"}</button>
+                <button className='p-2 box-border border-2 hover:text-white border-primary-700 w-full rounded-lg  font-semibold hover:scale-[1.02] hover:bg-primary-500 focus:cursor-wait transition-all'>{hasAccount ? "LogIn" : "SignUp"}</button>
             </form>
-            <div className='text-sm' >{hasAccount ? "Don't have an Account? " : "Already have an account? "}<button className='text-lg underline underline-offset-2 pt-1 hover:text-blue-800' onClick={handleHasAccount} >{hasAccount ? "Sign Up " : "Sign In"}</button> </div>
+            <div className='text-sm' >{hasAccount ? "Don't have an Account? " : "Already have an account? "}<button className='text-lg underline underline-offset-2 pt-1 hover:text-blue-800 visited:text-primary-900 focus:text-primary-900' onClick={handleHasAccount} >{hasAccount ? "Sign Up " : "Sign In"}</button> </div>
         </div>
     )
 }

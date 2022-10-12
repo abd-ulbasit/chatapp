@@ -10,10 +10,17 @@ const ChatBody: FC = () => {
     useEffect(() => {
         divref.current && AutoAnimate(divref.current)
     }, [divref])
+    // useEffect(() => {
+    // var elem = document.getElementById('ChatBox');
+    // // elem!.scrollTop = elem!.scrollHeight;
+    // // elem!.scrollTo()
+    // elem?.scrollIntoView()
+    //     elem!.scrollTop = 10000;
+    // }, [SinglechatCtx.singleChat])
     return (
 
 
-        <div className="flex  flex-col content-end justify-end  h-full " ref={divref} >
+        <div className="flex flex-col justify-end h-full dark:bg-primary-400 bg-primary-200" id={"ChatBox"} ref={divref} >
 
             {SinglechatCtx.singleChat?.chat && SinglechatCtx.singleChat?.chat.map((message, index) => {
                 return (

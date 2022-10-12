@@ -24,26 +24,24 @@ const NewChat = () => {
 
     }, [])
     return (
-        <div className="flex  flex-col  sm:flex-row items-stretch h-screen" >
+        <div className="flex  flex-col  md:flex-row  h-screen bg-primary-200 dark:bg-primary-400 overflow-auto" >
             <div>
-
-
                 <FindUser></FindUser>
             </div>
-            <div className='h-5/6 sm:w-1 bg-black py-3 align-middle invisible '></div>
+            <div className='h-5/6 w-1 bg-black py-3 align-middle  '></div>
             {/* //maping the recently joined users to the list */}
             <div className="flex flex-col align-center justify-center mx-auto" >
                 <h1 className='text-center font-semibold text-2xl'>New USers to the App</h1>
-                <div className='flex  flex-wrap '>
+                <div className='grid'>
 
                     {newUsers.map(user => {
                         // console.log(newUsers.length);
                         return (
-                            <div className='border w-1/2 mx-auto p-2 m-1 ' >
-                                <NavLink to={`/newchat/${user}`} key={user} >
+                            <NavLink to={`/newchat/${user}`} key={user} >
+                                <div className='border w-full mx-auto p-1 m-1  rounded-full px-2 text-center my-1 hover:scale-[1.02] hover:bg-primary-500 ' >
                                     {user}
-                                </NavLink>
-                            </div>
+                                </div>
+                            </NavLink>
                         )
                     })}
                 </div>

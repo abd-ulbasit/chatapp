@@ -3,6 +3,7 @@ import LogInForm from './LogInForm'
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Checkbox } from '@mui/material';
+// import { ThemeContext } from '../../contexts/ThemeContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 const LogInPage: FC = () => {
     const themeCtx = useContext(ThemeContext);
@@ -11,11 +12,11 @@ const LogInPage: FC = () => {
         console.log("Dark is ", themeCtx.dark);
     }
     return (
-        <div className='flex justify-center items-center h-screen bg-slate-200 dark:bg-slate-500
+        <div className='flex justify-center items-center h-screen bg-emerald-200 dark:bg-emerald-900
         text-slate-900'>
 
             <LogInForm></LogInForm>
-            <div className='fixed bottom-5 left-0 pl-5 rounded-r-full w-25 h-25 border border-slate-900 dark:bg-slate-200 z-30 p-1 bg-slate-500' >{<Checkbox style={{ color: `${themeCtx.dark ? "slateblue" : "white"}` }}
+            <div className='fixed bottom-5 left-0 pl-5 rounded-r-full w-25 h-25 border border-emerald-500 dark:bg-emerald-200 z-30 p-1 bg-emerald-500' >{<Checkbox style={{ color: `${themeCtx.dark ? "green" : "white"}` }}
                 onChange={handleDarkMode}
                 size={'medium'}
                 checked={themeCtx.dark!}

@@ -12,6 +12,8 @@ import { ChatContext } from './contexts/ChatsContext'
 import { AuthContext } from './contexts/AuthContext'
 import NotFound from './components/UI/NotFound'
 import LogInPage from './components/login/LogInPage'
+import { ThemeContext } from './contexts/ThemeContext'
+import WelcomePage from './components/WelcomePage'
 // const socket = io('http://localhost:3000', {
 //   query: {
 //     id: '123basit'
@@ -19,6 +21,13 @@ import LogInPage from './components/login/LogInPage'
 // })
 
 function App() {
+  // const minwidth=480;
+  const meetsMinwidthlimit = screen.width > 479;
+  // useEffect(() => {
+  //   let width = screen.availWidth;
+  //   console.log(width);
+  // }, [screen.availWidth]);
+  const themeCtx = useContext(ThemeContext);
   const { userName: username } = useContext(AuthContext);
   const ChatsCtx = useContext(ChatContext);
 
@@ -36,12 +45,12 @@ function App() {
     })
   }, [username])
   return (
-    <div className='dark'>
-      {username &&
+    <div className={`${themeCtx.dark ? "dark" : ""}`}>
+      {username && meetsMinwidthlimit &&
         <div className="">
           <Layout >
             <Routes>
-              <Route path="/" element={<div>Hello</div>} />
+              <Route path="/" element={<WelcomePage></WelcomePage>} />
               <Route path="/new" element={<NewChat></NewChat>} />
               <Route path="/chat/:id" element={<Chat></Chat>} />
               <Route path="/newchat/:id" element={<NewChatWithUser></NewChatWithUser>} />
@@ -49,12 +58,17 @@ function App() {
           </Layout>
         </div>
       }
-      {!username &&
+      {!username && meetsMinwidthlimit &&
         <Routes>
           <Route path='/' element={<LogInPage></LogInPage>} />
           <Route path='/*' element={<NotFound></NotFound>} />
         </Routes>
 
+      }
+      {!meetsMinwidthlimit &&
+        <div className='flex  justify-center items-center my-auto h-screen dark:bg-primary-900 dark:text-white '>
+          This Page is not for your ScreenSize
+        </div>
       }
     </div>
   )
