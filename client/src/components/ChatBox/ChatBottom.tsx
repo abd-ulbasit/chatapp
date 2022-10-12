@@ -17,7 +17,26 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
     const { setSingleChat } = useContext(SingleChatContext)
     const ChatsCtx = useContext(ChatContext);
     const { id: newRecipient } = useParams()
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
+    socket.on('forward-message', (data) => {
+        if (data.chatmate === username) {
+            axios.get(`http://localhost:3000/chats?username=${username}`,
+
+            ).then(res => {
+                const receivedChats = res.data
+                sortchatswrtTime(receivedChats)
+                // console.log(receivedChats);
+                ChatsCtx.setChats(receivedChats);
+                const chat = ChatsCtx.chats?.find(c => c.person1 === username && c.person2 === newRecipient);
+                if (chat) {
+                    setSingleChat(chat);
+                }
+
+                // setChats(receivedChats)
+                // console.log(chats);
+            })
+        }
+    })
     const handlesendMessage = (e: React.FormEvent<HTMLFormElement> | undefined) => {
         e?.preventDefault();
         if (message.length === 0) return;
@@ -34,35 +53,35 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
             readTime: new Date()
         }
         socket.emit('message', newMessage);
-        socket.on('forward-message', (data) => {
-            if (data.chatmate === username) {
-                // console.log("Its sent to me")
-                console.log(data.message);
-                const chatToshow: message = {
-                    message: data.message,
-                    sendername: data.username,
-                    timestamp: new Date().toISOString(),
-                    id: Math.random().toString(),
-                    receiver: {
-                        delivery: {
-                            delivered: false,
-                            deliveryTime: new Date().toISOString(),
-                        },
-                        reading: {
-                            read: false,
-                            readTime: new Date().toISOString(),
-                        }
-                    }
-                }
-                setSingleChat((prev: ChatType) => {
-                    return prev.chat?.concat(chatToshow);
-                })
-            }
+        // socket.on('forward-message', (data) => {
+        // if (data.chatmate === username) {
+        //     // console.log("Its sent to me")
+        //     console.log(data.message);
+        //     const chatToshow: message = {
+        //         message: data.message,
+        //         sendername: data.username,
+        //         timestamp: new Date().toISOString(),
+        //         id: Math.random().toString(),
+        //         receiver: {
+        //             delivery: {
+        //                 delivered: false,
+        //                 deliveryTime: new Date().toISOString(),
+        //             },
+        //             reading: {
+        //                 read: false,
+        //                 readTime: new Date().toISOString(),
+        //             }
+        //         }
+        //     }
+        //     setSingleChat((prev: ChatType) => {
+        //         return prev.chat?.concat(chatToshow);
+        //     })
+        // }
 
-            // setSingleChat((prev) => {
-            //     prev?.chat?.concat(data)
-            // })
-        })
+        // setSingleChat((prev) => {
+        //     prev?.chat?.concat(data)
+        // })
+        // })
         const newMessageToAppend: ChatMessageType = {
             message,
             sendername: username!,
