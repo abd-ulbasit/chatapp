@@ -28,11 +28,11 @@ const NewChat = () => {
             <div>
                 <FindUser></FindUser>
             </div>
-            <div className='h-5/6 w-1 bg-black py-3 align-middle  '></div>
+            <div className='h-5/6 w-1 bg-black py-3 align-middle mx-2 '></div>
             {/* //maping the recently joined users to the list */}
             <div className="flex flex-col align-center justify-center mx-auto" >
                 <h1 className='text-center font-semibold text-2xl'>New USers to the App</h1>
-                <div className='grid'>
+                <div className='grid mx-3'>
 
                     {newUsers.map(user => {
                         // console.log(newUsers.length);

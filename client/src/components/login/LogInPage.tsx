@@ -12,18 +12,19 @@ const LogInPage: FC = () => {
         console.log("Dark is ", themeCtx.dark);
     }
     return (
-        <div className='flex justify-center items-center h-screen bg-emerald-200 dark:bg-emerald-900
+        <div className='flex justify-center items-center h-screen bg-primary-200 dark:bg-primary-900
         text-slate-900'>
 
             <LogInForm></LogInForm>
-            <div className='fixed bottom-5 left-0 pl-5 rounded-r-full w-25 h-25 border border-emerald-500 dark:bg-emerald-200 z-30 p-1 bg-emerald-500' >{<Checkbox style={{ color: `${themeCtx.dark ? "green" : "white"}` }}
-                onChange={handleDarkMode}
-                size={'medium'}
-                checked={themeCtx.dark!}
-                icon={<LightModeIcon ></LightModeIcon>}
-                checkedIcon={<DarkModeIcon></DarkModeIcon>}
+            <div className='fixed bottom-5 left-0 pl-5 rounded-r-full w-25 h-25 border border-primary-500 dark:bg-primary-200 z-30 p-1 bg-primary-500' >
+                {<Checkbox style={{ color: `${themeCtx.dark ? "green" : "white"}` }}
+                    onChange={handleDarkMode}
+                    size={'medium'}
+                    checked={themeCtx.dark!}
+                    icon={<LightModeIcon ></LightModeIcon>}
+                    checkedIcon={<DarkModeIcon></DarkModeIcon>}
 
-            ></Checkbox>}</div>
+                ></Checkbox>}</div>
         </div>
     )
 }

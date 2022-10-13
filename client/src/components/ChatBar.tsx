@@ -14,7 +14,7 @@ const ChatBar: FC = () => {
     const chatsCtx = useContext(ChatContext);
     // const link = `/chat/${chat._id}`
     return (
-        <div className=" md:w-1/3 w-5/12 lg:w-1/4 overflow-y-auto relative bg-primary-200 dark:bg-primary-400" >
+        <div className=" md:w-1/3 w-5/12 lg:w-1/4 overflow-y-auto relative bg-primary-200 dark:bg-primary-400 border-r-2 border-r-primary-400" >
             <div className="bg-primary-300 dark:bg-primary-400 sticky w-full top-0 flex justify-between p-3 items-center rounded-b-md" >
                 <NavLink to={'/'} >{username}</NavLink>
                 <NavLink to={"new"}
@@ -34,9 +34,15 @@ const ChatBar: FC = () => {
                             <NavLink to={`chat/${chat._id}`} end
 
                                 key={chat._id}
-                                className={({ isActive }) => {
-                                    return isActive ? "scale-105 bg-primary-300 transition-all rounded-md" : "rounded-md"
-                                }}
+                                className={(e) => {
+                                    if (e.isActive) {
+                                        return "scale-105 bg-primary-300 transition-all rounded-md"
+                                    }
+                                    else {
+                                        return "rounded-md"
+                                    }
+                                }
+                                }
                             >
                                 <div className='bg-inherit p-1'>
                                     <div className=''>

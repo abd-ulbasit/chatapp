@@ -67,7 +67,7 @@ const LogInForm = () => {
                             <label className='mb-6'>UserName</label>
                         </div>
                         <input type="text" className='p-1 rounded-md border-2 w-full
-                    focus:border-primary-900 text-primary-600 font-semibold outline-0'value={username} minLength={5} onChange={handleUsernameChange} />
+                    focus:border-primary-900 text-primary-600 font-semibold outline-0'value={username} minLength={5} maxLength={15} onChange={handleUsernameChange} />
                     </div>
                     <div className='w-100 mb-2'>
                         <div>
