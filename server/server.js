@@ -93,9 +93,19 @@ app.get("/chats", async (req, res) => {
 app.delete("/deleteChat/", async (req, res) => {
     try {
         const chats = await Chat.deleteOne({
-            $and: [
-                { person1: req.body.username },
-                { person2: req.body.chatmate },
+            $or: [
+                {
+                    $and: [
+                        { person1: req.query.user1 },
+                        { person2: req.query.user2 },
+                    ],
+                },
+                {
+                    $and: [
+                        { person2: req.query.user1 },
+                        { person1: req.query.user2 },
+                    ],
+                },
             ],
         });
         res.status(204).send(chats);
@@ -194,29 +204,16 @@ app.get("/getupdatedChat", async (req, res) => {
         res.status(500).send(err);
     }
 });
-app.delete("/deleteChat", async (req, res) => {
-    try {
-        await Chat.deleteOne({
-            $or: [
-                {
-                    $and: [
-                        { person1: req.query.user1 },
-                        { person2: req.query.user2 },
-                    ],
-                },
-                {
-                    $and: [
-                        { person2: req.query.user1 },
-                        { person1: req.query.user2 },
-                    ],
-                },
-            ],
-        });
-        res.status(204);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-});
+// app.delete("/deleteChat", async (req, res) => {
+//     console.log(req.query._id);
+//     console.log("helllo");
+//     try {
+//         await Chat.deleteOne({ _id: req.query._id });
+//         res.status(204);
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// });
 /**
  * get updated chat request should be like this:
  * http://localhost:3000/getupdatedChat?user1=basit&user2=Basit

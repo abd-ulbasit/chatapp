@@ -14,6 +14,8 @@ import NotFound from './components/UI/NotFound'
 import LogInPage from './components/login/LogInPage'
 import { ThemeContext } from './contexts/ThemeContext'
 import WelcomePage from './components/WelcomePage'
+import { DeleteModelContext } from './contexts/DeleteModalContext'
+import DeleteModal from './components/deleteChat/DeleteModal'
 // const socket = io('http://localhost:3000', {
 //   query: {
 //     id: '123basit'
@@ -22,7 +24,9 @@ import WelcomePage from './components/WelcomePage'
 
 function App() {
   // const minwidth=480;
-  const meetsMinwidthlimit = screen.width > 479;
+  const meetsMinwidthlimit = screen.width > 479
+    ;
+
   // useEffect(() => {
   //   let width = screen.availWidth;
   //   console.log(width);
@@ -30,6 +34,7 @@ function App() {
   const themeCtx = useContext(ThemeContext);
   const { userName: username } = useContext(AuthContext);
   const ChatsCtx = useContext(ChatContext);
+
   // const [chats, setChats] = React.useState<ChatType[]>([])
   useEffect(() => {
     axios.get(`http://localhost:3000/chats?username=${username}`,
@@ -69,6 +74,7 @@ function App() {
           This Page is not for your ScreenSize
         </div>
       }
+
     </div>
   )
 }

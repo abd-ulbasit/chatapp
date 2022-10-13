@@ -202,6 +202,8 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
 
                 // setChats(receivedChats)
                 // console.log(chats);
+            }).catch(err => {
+                console.log(err);
             })
         }).catch(err => {
             console.log(err);

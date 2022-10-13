@@ -1,10 +1,14 @@
 import AutoAnimate from "@formkit/auto-animate"
 import React, { FC, useContext, useEffect, useRef } from 'react'
+import { DeleteModelContext } from "../../contexts/DeleteModalContext"
 import { SingleChatContext } from '../../contexts/SingleChatContext'
 import { ChatMessageType, ChatType } from '../../Models/Models'
+import DeleteModal from "../deleteChat/DeleteModal"
 import ChatBubble from './ChatBubble'
 const ChatBody: FC = () => {
     const SinglechatCtx = useContext(SingleChatContext);
+
+    const { isopen } = useContext(DeleteModelContext);
     const divref = useRef<HTMLDivElement>(null)
     // const [listref]=useAut
     useEffect(() => {
@@ -28,8 +32,11 @@ const ChatBody: FC = () => {
                 )
             })
             }
+            {
+                isopen && <DeleteModal ></DeleteModal>
+            }
         </div>
     )
 }
-
+    ;
 export default ChatBody
