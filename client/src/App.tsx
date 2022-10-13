@@ -30,13 +30,12 @@ function App() {
   const themeCtx = useContext(ThemeContext);
   const { userName: username } = useContext(AuthContext);
   const ChatsCtx = useContext(ChatContext);
-
   // const [chats, setChats] = React.useState<ChatType[]>([])
   useEffect(() => {
     axios.get(`http://localhost:3000/chats?username=${username}`,
 
     ).then(res => {
-      const receivedChats = res.data
+      const receivedChats = res.data;
       sortchatswrtTime(receivedChats)
       // console.log(receivedChats);
       ChatsCtx.setChats(receivedChats);

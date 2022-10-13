@@ -52,11 +52,11 @@ const FindUser = () => {
         }
     }, [search])
     return (
-        <div className='flex flex-col mx-8  sm:my-3 px-auto border [&>*]:py-2 '>
-            <div className='font-semibold text-lg text-center'>Find User</div>
+        <div className='flex flex-col mx-8  sm:my-3 px-auto  [&>*]:py-2 pt-0 md:pt-16 dark:font-black'>
+            <div className='font-semibold text-2xl text-center'>Find User</div>
             <form onSubmit={handleFindUser} className="w-full
             flex" >
-                <input type="text" value={search} onChange={handleSearchInputChange} className="flex-grow p-2 rounded-lg" />
+                <input type="text" value={search} onChange={handleSearchInputChange} className="flex-grow p-2 rounded-lg focus:outline-0 focus:border-primary-700 active:border-primary-600" />
                 {/* <button onClick={() => console.log("fetching the users")} className="mx-3 border rounded-lg px-2" >Find user</button> */}
             </form>
             {
@@ -64,7 +64,7 @@ const FindUser = () => {
                     {foundusers.map((eachuser: User, index) => {
                         return (
                             <NavLink to={`/newchat/${eachuser.username}`} >
-                                <div key={index} className="border rounded-full px-2 text-center my-1 hover:scale-[1.02] hover:bg-primary-500" >
+                                <div key={index} className="border font-normal rounded-full px-2 text-center my-1 hover:scale-[1.02] hover:bg-primary-500" >
                                     {eachuser.username}
                                 </div>
                             </NavLink>
@@ -73,12 +73,12 @@ const FindUser = () => {
                 </div>
             }
             {
-                searchInitialized && foundusers.length === 0 && !loading && <div>
-                    NO USER FOUND
+                searchInitialized && foundusers.length === 0 && !loading && <div className='text-center'>
+                    No User Found
                 </div>
             }
             {
-                loading && <div>Loading Users</div>
+                loading && <div className='text-center'>Loading Users</div>
             }
         </div>
     )
