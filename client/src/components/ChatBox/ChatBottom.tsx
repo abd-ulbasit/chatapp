@@ -12,7 +12,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 const socket = io('http://localhost:3000', { protocols: 'echo-protocol' })
 socket.emit('connection');
 const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
-
+    //moved the head of the git to this branch now pushing to github for testing.
     const { userName: username } = useContext(AuthContext);
     const SingleChatCtx = useContext(SingleChatContext);
     const { setSingleChat } = useContext(SingleChatContext)
