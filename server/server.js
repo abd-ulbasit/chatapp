@@ -27,12 +27,13 @@ const socketIO = require("socket.io")(httpServer, {
         origin: ["http://localhost:5173", "*"],
     },
 });
+
 // socketIO
 //Add this before the app.get() block
 socketIO.on("connection", (socket) => {
     console.log(`⚡: ${socket.id} user just connected!`);
     socket.on("disconnect", () => {
-        console.log("🔥: A user disconnected");
+        console.log(`⚡: ${socket.id} user just disconnected!`);
     });
     socket.on("message", (data) => {
         // console.log(data);
@@ -69,7 +70,10 @@ app.post("/newchat", async (req, res) => {
     // console.log(req.body.);
     try {
         await newChat.save();
-        res.status(201).send(newChat);
+        const savedChat = await Chat.find({
+            $and: [{ person1: newChat.person1 }, { person2: newChat.person2 }],
+        });
+        res.status(201).send(savedChat);
     } catch (error) {
         res.status(400).send(error);
     }

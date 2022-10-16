@@ -11,7 +11,7 @@ const ChatBubble: FC<{ chat: ChatMessageType | undefined }> = ({ chat }) => {
     //     elem?.scrollIntoView()
     // }, [])
     return (
-        <div id={"Chatbox"} className={`block clear-both  rounded-full px-4 max-w-[80%] mx-2 my-1 w-fit  col-span-12  dark:text-dark  dark:bg-primary-500 bg-primary-300 ${chat!.sendername == username ? "ml-auto " : ""}`}
+        <div id={"Chatbox"} className={`block clear-both  rounded-full px-4 max-w-[80%] mx-2 my-1 w-fit  col-span-12  dark:text-dark  break-words dark:bg-primary-500 bg-primary-300 ${chat!.sendername == username ? "ml-auto " : ""}`}
             ref={divRef}>
             {chat?.message}
         </div>

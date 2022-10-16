@@ -8,19 +8,22 @@ import { SingleChatContext, SingleChatContextProvider } from './contexts/SingleC
 import { AuthProvider } from './contexts/AuthContext'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { DeleteModelContextProvider } from './contexts/DeleteModalContext'
+import { SocketContextProvider } from './contexts/SocketContext'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ChatContextProvider>
       <AuthProvider>
-        <ThemeProvider>
-          <SingleChatContextProvider>
-            <DeleteModelContextProvider>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
-            </DeleteModelContextProvider>
-          </SingleChatContextProvider>
-        </ThemeProvider>
+        <SocketContextProvider>
+          <ThemeProvider>
+            <SingleChatContextProvider>
+              <DeleteModelContextProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </DeleteModelContextProvider>
+            </SingleChatContextProvider>
+          </ThemeProvider>
+        </SocketContextProvider>
       </AuthProvider>
     </ChatContextProvider>
   </React.StrictMode>
