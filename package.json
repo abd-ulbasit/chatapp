@@ -3,6 +3,6 @@
     "main": "./server/server.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "build": "cd server  && echo \" in the server directory now\" "
+      "build": "cd server   && pwd && echo \" in the server directory now\" "
     }
 }
