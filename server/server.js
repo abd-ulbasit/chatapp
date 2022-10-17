@@ -6,6 +6,7 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const app = express();
 const User = require("./models/User");
+require("dotenv").config();
 const { Socket } = require("dgram");
 const httpServer = createServer(app);
 // const io = new Server(httpServer, {
@@ -49,8 +50,7 @@ socketIO.on("connection", (socket) => {
 //     console.log(clients);
 // }, 2000);
 httpServer.listen(3000);
-const uri =
-    "mongodb+srv://admin:admin@learn-next.7nvta2d.mongodb.net/ChatApp?retryWrites=true&w=majority";
+const uri = process.env.URI;
 mongoose
     .connect(uri, {
         useNewUrlParser: true,
