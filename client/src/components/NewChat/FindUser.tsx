@@ -64,7 +64,7 @@ const FindUser = () => {
                     {foundusers.map((eachuser: User, index) => {
                         return (
                             <NavLink to={`/newchat/${eachuser.username}`} >
-                                <div key={index} className="border font-normal rounded-full px-2 text-center my-1 hover:scale-[1.02] hover:bg-primary-500" >
+                                <div key={index} className="border border-primary-300 font-normal rounded-full px-2 text-center my-1 hover:scale-[1.02] hover:bg-primary-500" >
                                     {eachuser.username}
                                 </div>
                             </NavLink>

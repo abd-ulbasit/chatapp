@@ -21,13 +21,13 @@ const ChatBar: FC = () => {
                     className=" rounded-full p-2 mr-3 bg-primary-400 dark:bg-primary-500"
                     style={({ isActive }) => {
                         return isActive ? {
-                            border: "2px green solid"
+                            outline: "2px black solid"
                         } : {}
                     }} >
                     <AddIcon></AddIcon>
                 </NavLink>
             </div>
-            <div className="" >
+            <div className="pb-16" >
                 {chatsCtx.chats!.map((chat: ChatType) => {
                     return (
                         <div className='border border-primary-600 rounded-md m-1  overflow-hidden dark:bg-primary-500 hover:dark:bg-primary-200 bg-primary-200 hover:bg-primary-400 hover:scale-[1.02] transition-all' key={chat._id} >

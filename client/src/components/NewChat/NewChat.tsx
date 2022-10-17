@@ -28,7 +28,7 @@ const NewChat = () => {
             <div>
                 <FindUser></FindUser>
             </div>
-            <div className='h-5/6 w-1 bg-black py-3 align-middle mx-2 '></div>
+            {/* <div className='h-5/6 w-1 bg-black py-3 align-middle mx-2 '></div> */}
             {/* //maping the recently joined users to the list */}
             <div className="flex flex-col align-center justify-center mx-auto" >
                 <h1 className='text-center font-semibold text-2xl'>New USers to the App</h1>
@@ -38,7 +38,7 @@ const NewChat = () => {
                         // console.log(newUsers.length);
                         return (
                             <NavLink to={`/newchat/${user}`} key={user} >
-                                <div className='border w-full mx-auto p-1 m-1  rounded-full px-2 text-center my-1 hover:scale-[1.02] hover:bg-primary-500 ' >
+                                <div className='border border-primary-300 w-full mx-auto p-1 m-1  rounded-full px-2 text-center my-1 hover:scale-[1.02] hover:bg-primary-500 ' >
                                     {user}
                                 </div>
                             </NavLink>

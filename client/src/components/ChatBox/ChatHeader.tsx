@@ -28,14 +28,14 @@ const ChatHeader: FC<{ recipient: string | undefined }> = ({ recipient }) => {
             </div>
             <div className='flex' >
 
-                <div className=' rounded-full w-25 h-25 border border-emerald-500 dark:bg-emerald-200 z-30 p-1 bg-emerald-500' >{<Checkbox style={{ color: `${themeCtx.dark ? "green" : "white"}` }}
+                {/* <div className=' rounded-full w-25 h-25 border border-emerald-500 dark:bg-emerald-200 z-30 p-1 bg-emerald-500' >{<Checkbox style={{ color: `${themeCtx.dark ? "green" : "white"}` }}
                     onChange={handleDarkMode}
                     size={'medium'}
                     checked={themeCtx.dark!}
                     icon={<LightModeIcon ></LightModeIcon>}
                     checkedIcon={<DarkModeIcon></DarkModeIcon>}
 
-                ></Checkbox>}</div>
+                ></Checkbox>}</div> */}
                 <button onClick={HandleDeleteClick}><DeleteForeverIcon></DeleteForeverIcon> </button>
             </div>
         </div >
