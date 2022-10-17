@@ -28,7 +28,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
     console.log("rendering the chat bottom");
     socket.on('forward-message', (data) => {
         if (!socketisFirst) {
-            return
+            return;
         }
         console.log("in forward message");
         setSocketisFirst(false);
