@@ -37,7 +37,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
             // if (isFirst) {
             // setIsFirst(false);
             console.log("Guesss someone sent me a message");
-            axios.get(`http://localhost:3000/chats?username=${username}`,
+            axios.get(`${import.meta.env.VITE_SERVER_URL}chats?username=${username}`,
 
             ).then(res => {
                 const receivedChats = res.data
@@ -125,7 +125,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
         console.log(chat?.person2, chat?.person1)
             ;
         // console.log(message);
-        axios.patch("http://localhost:3000/updatechat", {
+        axios.patch(`${import.meta.env.VITE_SERVER_URL}updatechat`, {
             newMessage
         }).then(res => {
             // SingleChatCtx.setSingleChat((prev) => {
@@ -171,7 +171,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
                     }
                     ]
                 }
-                axios.post("http://localhost:3000/newchat", {
+                axios.post(`${import.meta.env.VITE_SERVER_URL}newchat`, {
                     newChat
                 }).then(res => {
                     console.log(res.data);
@@ -206,7 +206,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
                 // })
             }
             //fetching the chats to update the chats
-            axios.get(`http://localhost:3000/chats?username=${username}`,
+            axios.get(`${import.meta.env.VITE_SERVER_URL}chats?username=${username}`,
 
             ).then(res => {
                 const receivedChats = res.data

@@ -28,7 +28,7 @@ const FindUser = () => {
         }
 
         const findfromdb = setTimeout(() => {
-            axios.get("http://localhost:3000/finduser", {
+            axios.get(`${import.meta.env.VITE_SERVER_URL}finduser`, {
                 params: {
                     search
                 }

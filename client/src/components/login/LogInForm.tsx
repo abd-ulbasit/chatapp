@@ -17,7 +17,7 @@ const LogInForm = () => {
         e.preventDefault();
         // console.log(username, password)
         if (hasAccount) {
-            axios.post(`${"http://localhost:3000/"}users`, { username, password }).then((res) => {
+            axios.post(`${import.meta.env.VITE_SERVER_URL}users`, { username, password }).then((res) => {
                 console.log(res);
                 if (res.status === 204) {
                     // alert("NO USER Found")
@@ -35,7 +35,7 @@ const LogInForm = () => {
                 console.log(err);
             })
         } else {
-            axios.post(`${"http://localhost:3000/"}newuser`, { username, password }).then((res) => {
+            axios.post(`${import.meta.env.VITE_SERVER_URL}newuser`, { username, password }).then((res) => {
 
                 if (res.status === 200) {
                     setErrorMessage("User already Exists")

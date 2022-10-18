@@ -18,10 +18,10 @@ const DeleteModal: FC = ({ }) => {
     const { userName: username } = useContext(AuthContext);
     const nevigate = useNavigate()
     const handleDeleteChat = () => {
-        axios.delete(`http://localhost:3000/deleteChat?user1=${singleChat?.person1}&user2=${singleChat?.person2}`)
+        axios.delete(`${import.meta.env.VITE_SERVER_URL}deleteChat?user1=${singleChat?.person1}&user2=${singleChat?.person2}`)
             .then(res => {
                 console.log(res.status);
-                axios.get(`http://localhost:3000/chats?username=${username}`,
+                axios.get(`${import.meta.env.VITE_SERVER_URL}chats?username=${username}`,
                 ).then(res => {
                     const receivedChats = res.data
                     sortchatswrtTime(receivedChats)

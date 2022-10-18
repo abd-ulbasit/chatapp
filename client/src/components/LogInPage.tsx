@@ -31,7 +31,7 @@ const LogInPage = () => {
             return;
         }
         if (hasAccount) {
-            axios.post('http://localhost:3000/users', {
+            axios.post(`${import.meta.env.VITE_SERVER_URL}users`, {
                 username: username,
                 password: password
             }).then((res) => {
@@ -45,7 +45,7 @@ const LogInPage = () => {
         }
         else {
             // sign up
-            axios.post('http://localhost:3000/newuser', {
+            axios.post(`${import.meta.env.VITE_SERVER_URL}newuser`, {
                 username: username,
                 password: password
             }).then((res) => {

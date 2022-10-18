@@ -10,7 +10,7 @@ const NewChat = () => {
 
     }, [])
     useEffect(() => {
-        axios.get(`http://localhost:3000/newusers`).then(res => {
+        axios.get(`${import.meta.env.VITE_SERVER_URL}newusers`).then(res => {
             const users = res.data.map((eachuser: User) => {
                 return eachuser.username
             })
