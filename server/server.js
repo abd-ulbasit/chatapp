@@ -50,8 +50,8 @@ socketIO.on("connection", (socket) => {
 //     console.log(clients);
 // }, 2000);
 // const PORT = 3000;
-httpServer.listen(`0.0.0.0:${process.env.PORT}`, () => {
-    console.log("listening on port", PORT);
+httpServer.listen(process.env.PORT, () => {
+    console.log("listening on port", process.env.PORT);
 });
 const uri = process.env.URI;
 mongoose
