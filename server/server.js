@@ -49,8 +49,8 @@ socketIO.on("connection", (socket) => {
 // setInterval(() => {
 //     console.log(clients);
 // }, 2000);
-const PORT = 3000;
-httpServer.listen(PORT, () => {
+// const PORT = 3000;
+httpServer.listen(`0.0.0.0:$PORT`, () => {
     console.log("listening on port", PORT);
 });
 const uri = process.env.URI;
