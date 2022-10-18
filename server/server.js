@@ -49,7 +49,10 @@ socketIO.on("connection", (socket) => {
 // setInterval(() => {
 //     console.log(clients);
 // }, 2000);
-httpServer.listen(3000);
+const PORT = 3000;
+httpServer.listen(PORT, () => {
+    console.log("listening on port", PORT);
+});
 const uri = process.env.URI;
 mongoose
     .connect(uri, {
