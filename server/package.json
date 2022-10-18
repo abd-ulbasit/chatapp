@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm i && kill -9 $(lsof -i tcp:3000 -t) &&  node server.js"
+    "start": "npm i  &&  node server.js"
   },
   "keywords": [],
   "author": "",
