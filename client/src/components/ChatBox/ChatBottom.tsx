@@ -10,7 +10,7 @@ import { sortchatswrtTime } from "../../App"
 import { AuthContext } from '../../contexts/AuthContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { SocketContext } from '../../contexts/SocketContext';
-const socket = io('http://localhost:3000');
+const socket = io(`${import.meta.env.VITE_SERVER_URL}`);
 socket.emit('connection');
 const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
     //moved the head of the git to this branch now pushing to github for testing.
@@ -54,7 +54,7 @@ const ChatBottom: FC<{ chat: ChatType | undefined }> = ({ chat }) => {
             })
             // console.log("updating the chat");
             // }
-            // axios.get(`http://localhost:3000/getupdatedChat?user1=${username}&user2=${data.chatmate}`).then((res) => {
+            // axios.get(`${import.meta.env.VITE_SERVER_URL}getupdatedChat?user1=${username}&user2=${data.chatmate}`).then((res) => {
             //     console.log(res);
             //     setSingleChat(res.data)
             // })
