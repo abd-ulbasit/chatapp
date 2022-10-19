@@ -37,7 +37,7 @@ function App() {
 
   // const [chats, setChats] = React.useState<ChatType[]>([])
   useEffect(() => {
-    axios.get(`http://localhost:3000/chats?username=${username}`,
+    axios.get(`${import.meta.env.VITE_SERVER_URL}chats?username=${username}`,
 
     ).then(res => {
       const receivedChats = res.data;
