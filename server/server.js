@@ -17,7 +17,7 @@ const httpServer = createServer(app);
 app.use(
     cors({
         origin: [
-            "https://chatapp-tan.vercel.app/",
+            "https://chatapp-tan.vercel.app",
             "http://localhost:5173",
             "*",
         ],
@@ -30,7 +30,7 @@ app.use(express.json());
 const socketIO = require("socket.io")(httpServer, {
     cors: {
         origin: [
-            "https://chatapp-tan.vercel.app/",
+            "https://chatapp-tan.vercel.app",
             "http://localhost:5173",
             "*",
         ],
