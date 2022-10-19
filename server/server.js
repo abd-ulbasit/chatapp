@@ -16,11 +16,12 @@ const httpServer = createServer(app);
 // });
 app.use(
     cors({
-        origin: [
-            "https://chatapp-tan.vercel.app",
-            "http://localhost:5173",
-            "*",
-        ],
+        origin: "*", // allow to server to accept request from different origin
+        // origin: [
+        //     "https://chatapp-tan.vercel.app",
+        //     "http://localhost:5173",
+        //     "*",
+        // ],
     })
 );
 app.use(express.json());
@@ -29,11 +30,12 @@ app.use(express.json());
 // });
 const socketIO = require("socket.io")(httpServer, {
     cors: {
-        origin: [
-            "https://chatapp-tan.vercel.app",
-            "http://localhost:5173",
-            "*",
-        ],
+        origin: "*",
+        // origin: [
+        //     "https://chatapp-tan.vercel.app",
+        //     "http://localhost:5173",
+        //     "*",
+        // ],
     },
 });
 
